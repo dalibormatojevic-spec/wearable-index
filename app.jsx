@@ -253,17 +253,18 @@ function App() {
               {t.showAds && <AdSlot size={[300, 250]} label="ADVERTISEMENT" />}
             </aside>
           </div>
-          <SiteFooter setPage={setPage} />
         </main>
       )}
 
-      {page === "shop"    && <ShopPage    setPage={setPage} />}
-      {page === "youtube" && <YouTubePage setPage={setPage} />}
-      {page === "about"   && <AboutPage   setPage={setPage} />}
-      {page === "contact" && <ContactPage setPage={setPage} />}
-      {page === "privacy" && <PrivacyPage setPage={setPage} />}
+      {page === "shop"    && <ShopPage />}
+      {page === "youtube" && <YouTubePage />}
+      {page === "about"   && <AboutPage />}
+      {page === "contact" && <ContactPage />}
+      {page === "privacy" && <PrivacyPage />}
 
       {t.showAds && <div className="ad-wrap ad-footer"><AdSlot size={[970, 90]} label="FOOTER BANNER ADVERTISEMENT" /></div>}
+
+      <SiteFooter setPage={setPage} />
 
       <TweaksPanel>
         <TweakSection label="Display" />
