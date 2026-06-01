@@ -1,6 +1,9 @@
-// controls.jsx — hero card, mode switch, brand pills, chart toolbar
+// controls.jsx — hero card, mode switch, brand pills, chart toolbar, navigation
 
 const { useState: useState_c, useMemo: useMemo_c } = React;
+
+// ── Navigation Context ────────────────────────────────────────────────────
+window.navigate = null; // will be set by App
 
 // Curated display-name + tagline overrides for hero card top pick
 const HERO_LABELS = {
@@ -25,8 +28,6 @@ function HeroCard({ topRow, mode, totalVisible, totalAll, selectedRow, selectedB
       </div>
     );
   }
-  // When a device is pinned on the chart, the hero reflects that device instead
-  // of the current top pick.
   const isSelected = !!selectedRow;
   const row = selectedRow || topRow;
   const v = mode === "hr" ? row.r : row.score;
@@ -34,7 +35,6 @@ function HeroCard({ topRow, mode, totalVisible, totalAll, selectedRow, selectedB
   const valLbl = mode === "hr" ? "R SCORE" : "SLEEP SCORE";
   const override = (HERO_LABELS[mode] || {})[row.name];
   const displayName = override?.name || window.prettyName(row.name);
-
   const eyebrow = isSelected ? "SELECTED DEVICE" : "CURRENT TOP PICK";
   const displaySub = isSelected
     ? `${row.brand} · selected from the chart — click anywhere to return to the top pick.`
@@ -42,11 +42,9 @@ function HeroCard({ topRow, mode, totalVisible, totalAll, selectedRow, selectedB
       || (mode === "hr"
         ? `Top correlation to ECG reference among ${totalVisible} selected device${totalVisible === 1 ? "" : "s"}.`
         : `Highest sleep-stage agreement among ${totalVisible} selected device${totalVisible === 1 ? "" : "s"}.`);
-
   const beatPct = isSelected && totalVisible > 0
     ? Math.round((selectedBeats / totalVisible) * 100)
     : 100;
-
   return (
     <div className="hero">
       <div className="hero-left">
@@ -156,7 +154,6 @@ function BrandPill({ brand, devices, activeSet, onToggleBrand, onToggleDevice, m
   const rootRef = React.useRef(null);
   const color = window.BRAND_COLORS[brand] || "#333";
 
-  // Close the device drawer when clicking anywhere outside this pill.
   React.useEffect(() => {
     if (!open) return;
     const onDocClick = (e) => {
@@ -175,9 +172,7 @@ function BrandPill({ brand, devices, activeSet, onToggleBrand, onToggleDevice, m
   const total = devices.length;
   const allOn = activeCount === total;
   const someOn = activeCount > 0 && !allOn;
-  const isActive = activeCount > 0;
 
-  // Brand badge: determined by the highest-scoring device in this brand.
   const vs = devices.map((d) => (mode === "hr" ? d.r : d.score));
   const best = vs.length ? Math.max(...vs) : 0;
   const badge = window.badgeFor(mode, best);
@@ -239,29 +234,134 @@ function TopBar() {
           Featured on <b>The Quantified Scientist</b> — scientific wearable reviews from Vienna
         </span>
         <div className="topbar-actions">
-          <a href="#" onClick={(e) => e.preventDefault()}>Watch latest review →</a>
-          <button className="topbar-cta" onClick={() => alert("Become a Member — placeholder")}>BECOME A MEMBER</button>
+          <a href="https://www.youtube.com/@TheQuantifiedScientist" target="_blank" rel="noopener">Watch latest review →</a>
+          <a className="topbar-cta" href="https://www.youtube.com/channel/UChNWxrTlmh4IRSevon1X93g/join" target="_blank" rel="noopener" style={{textDecoration:"none",color:"#fff"}}>BECOME A MEMBER</a>
         </div>
       </div>
     </div>
   );
 }
 
-function SiteHeader() {
+function SiteHeader({ page, setPage }) {
   return (
     <header className="site-header">
       <div className="brand">
         <div className="brand-name">WEARABLE INDEX</div>
       </div>
       <nav className="nav">
-        <a className="active" href="#">Research</a>
-        <a href="Shop the Index.html">Shop the Index</a>
-        <a href="YouTube.html">YouTube</a>
+        <a className={page === "research" ? "active" : ""} href="#" onClick={(e) => { e.preventDefault(); setPage("research"); }}>Research</a>
+        <a className={page === "shop" ? "active" : ""} href="#" onClick={(e) => { e.preventDefault(); setPage("shop"); }}>Shop the Index</a>
+        <a className={page === "youtube" ? "active" : ""} href="#" onClick={(e) => { e.preventDefault(); setPage("youtube"); }}>YouTube</a>
       </nav>
       <div className="header-side">
         <button className="hdr-ic" aria-label="Account">◌</button>
       </div>
     </header>
+  );
+}
+
+function ShopPage() {
+  const GENI = "https://geni.us/thequantifiedscientist";
+  const SHOP = [
+    {
+      section: "Heart Rate",
+      items: [
+        { name: "Polar H10 Chest Strap", desc: "The gold standard for HR accuracy.", url: GENI },
+        { name: "Wahoo TICKR Heart Rate Monitor", desc: "Reliable optical-free chest strap for training zones.", url: GENI },
+      ],
+    },
+    {
+      section: "Sleep",
+      items: [
+        { name: "Eight Sleep Pod 5", desc: "Best in class sleep tracking.", url: "https://eight-sleep.ioym.net/TheQuantifiedScientist", code: "TQS" },
+        { name: "Oura Ring 4", desc: "Finger-worn ring with strong sleep-stage agreement.", url: "https://ouraring.sjv.io/Oura4" },
+        { name: "Whoop 5.0", desc: "Screen-free strap focused on recovery and sleep.", url: "https://join.whoop.com/QuantifiedScientist" },
+      ],
+    },
+    {
+      section: "Running & GPS",
+      items: [
+        { name: "Garmin Forerunner Series", desc: "Multisport GPS watches with full training metrics.", url: GENI },
+      ],
+    },
+    {
+      section: "Apps & Software",
+      items: [
+        { name: "Runna", desc: "Best running app — personalized training plans.", url: "https://web.runna.com/redeem?code=QUANT", code: "QUANT" },
+        { name: "Strava Premium", desc: "20% off — segments, analysis and route planning.", url: "https://www.strava.com/subscribe/checkout?code=QUANTIFIEDSCIENTIST", code: "20% OFF" },
+      ],
+    },
+    {
+      section: "General",
+      items: [
+        { name: "Anything on Amazon", desc: "Start any Amazon purchase here to support the site.", url: GENI },
+      ],
+    },
+  ];
+
+  const hostOf = (url) => {
+    try { return new URL(url).hostname.replace(/^www\./, ""); } catch (e) { return ""; }
+  };
+
+  return (
+    <main className="shop-main">
+      <div className="shop-head">
+        <div className="shop-eyebrow">AFFILIATE PICKS</div>
+        <h1 className="shop-title">Shop the Index</h1>
+        <p className="shop-sub">
+          If you find this useful, consider using these links when buying — it
+          <b> supports the site at no extra cost to you.</b>
+        </p>
+      </div>
+      {SHOP.map((sec) => (
+        <section key={sec.section} className="shop-section">
+          <div className="shop-section-head">
+            <span className="shop-section-title">{sec.section.toUpperCase()}</span>
+            <span className="shop-section-rule"></span>
+            <span className="shop-section-count">{sec.items.length} ITEM{sec.items.length === 1 ? "" : "S"}</span>
+          </div>
+          <div className="shop-grid">
+            {sec.items.map((it) => (
+              <div key={it.name} className="shop-card">
+                <div className="shop-card-top">
+                  <div className="shop-card-name">{it.name}</div>
+                  {it.code && <span className="shop-card-code">CODE {it.code}</span>}
+                </div>
+                <div className="shop-card-desc">{it.desc}</div>
+                <div className="shop-card-foot">
+                  <span className="shop-card-host">{hostOf(it.url)}</span>
+                  <a className="shop-buy" href={it.url} target="_blank" rel="noopener sponsored">Buy now →</a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      ))}
+      <div className="shop-disclaimer">
+        Disclosure: the links above are affiliate links. If you buy through them, the site may earn a
+        small commission — your price stays exactly the same. We only list hardware and software that
+        appears in the accuracy index.
+      </div>
+    </main>
+  );
+}
+
+function YouTubePage() {
+  return (
+    <main className="yt-page">
+      <div className="yt-frame">
+        <span className="yt-mark" aria-hidden="true">
+          <svg viewBox="0 0 28 20" width="64" height="46">
+            <rect width="28" height="20" rx="6" fill="#FF0000" />
+            <path d="M11 6 L20 10 L11 14 Z" fill="#fff" />
+          </svg>
+        </span>
+        <div className="yt-eyebrow">CHANNEL</div>
+        <h1 className="yt-title">The Quantified Scientist</h1>
+        <p className="yt-line">Scientific wearable reviews from Vienna</p>
+        <a className="yt-watch" href="https://www.youtube.com/@TheQuantifiedScientist" target="_blank" rel="noopener">Watch on YouTube →</a>
+      </div>
+    </main>
   );
 }
 
@@ -273,4 +373,4 @@ function AdSlot({ size, label }) {
   );
 }
 
-Object.assign(window, { HeroCard, ModePanel, IndexGuide, ChartToolbar, BrandPill, TopBar, SiteHeader, AdSlot });
+Object.assign(window, { HeroCard, ModePanel, IndexGuide, ChartToolbar, BrandPill, TopBar, SiteHeader, ShopPage, YouTubePage, AdSlot });
