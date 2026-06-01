@@ -27,7 +27,6 @@ function App() {
         ? "Data coming soon — check back after our next update"
         : null;
 
-  // ── per-mode active sets ─────────────────────────────────────────────────
   const top10Names = (rows, key) =>
     new Set([...rows].sort((a, b) => b[key] - a[key]).slice(0, 10).map((d) => d.name));
   const [activeByMode, setActiveByMode] = useState(() => ({
@@ -39,7 +38,6 @@ function App() {
   const setActive = (next) =>
     setActiveByMode((prev) => ({ ...prev, [mode]: next instanceof Set ? next : new Set(next) }));
 
-  // ── ui state ─────────────────────────────────────────────────────────────
   const [pinned, setPinned] = useState(null);
   const [hovered, setHovered] = useState(null);
   const [search, setSearch] = useState("");
@@ -67,7 +65,6 @@ function App() {
     window.history.replaceState(null, "", "#" + params.toString());
   }, [mode, activeSet]);
 
-  // ── derived ──────────────────────────────────────────────────────────────
   const byBrand = useMemo(() => {
     const map = new Map();
     DATA.forEach((d) => {
@@ -104,7 +101,6 @@ function App() {
     ? visibleRows.filter((d) => valOf(d) < valOf(selectedRow)).length
     : 0;
 
-  // ── actions ──────────────────────────────────────────────────────────────
   const activateAll = () => {
     setActive(new Set(DATA.map((d) => d.name)));
     setIsTop10(false);
