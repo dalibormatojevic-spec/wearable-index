@@ -253,24 +253,17 @@ function App() {
               {t.showAds && <AdSlot size={[300, 250]} label="ADVERTISEMENT" />}
             </aside>
           </div>
+          <SiteFooter setPage={setPage} />
         </main>
       )}
 
-      {page === "shop" && <ShopPage />}
-      {page === "youtube" && <YouTubePage />}
+      {page === "shop"    && <ShopPage    setPage={setPage} />}
+      {page === "youtube" && <YouTubePage setPage={setPage} />}
+      {page === "about"   && <AboutPage   setPage={setPage} />}
+      {page === "contact" && <ContactPage setPage={setPage} />}
+      {page === "privacy" && <PrivacyPage setPage={setPage} />}
 
       {t.showAds && <div className="ad-wrap ad-footer"><AdSlot size={[970, 90]} label="FOOTER BANNER ADVERTISEMENT" /></div>}
-
-      <footer className="foot">
-        <div>© 2024 WEARABLE INDEX · <a href="Privacy Policy.html">Privacy Policy</a> · <a href="About.html">About</a> · <a href="Contact.html">Contact</a></div>
-        <div className="foot-meta">
-          <span><b>{window.HR_DATA.length}</b> DATA POINTS</span>
-          <span>·</span>
-          <span><b>{new Set(window.HR_DATA.map((d) => d.brand)).size}</b> BRANDS</span>
-          <span>·</span>
-          <span>REVISED: MAY 29</span>
-        </div>
-      </footer>
 
       <TweaksPanel>
         <TweakSection label="Display" />
