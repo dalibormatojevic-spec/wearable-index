@@ -260,7 +260,30 @@ function SiteHeader({ page, setPage }) {
   );
 }
 
-function ShopPage() {
+function SiteFooter({ setPage }) {
+  return (
+    <footer className="foot">
+      <div>
+        © 2025 WEARABLE INDEX
+        {" · "}
+        <a href="#" onClick={(e) => { e.preventDefault(); setPage("privacy"); }}>Privacy Policy</a>
+        {" · "}
+        <a href="#" onClick={(e) => { e.preventDefault(); setPage("about"); }}>About</a>
+        {" · "}
+        <a href="#" onClick={(e) => { e.preventDefault(); setPage("contact"); }}>Contact</a>
+      </div>
+      <div className="foot-meta">
+        <span><b>68</b> DATA POINTS</span>
+        <span>·</span>
+        <span><b>12</b> BRANDS</span>
+        <span>·</span>
+        <span>REVISED: MAY 29</span>
+      </div>
+    </footer>
+  );
+}
+
+function ShopPage({ setPage }) {
   const GENI = "https://geni.us/thequantifiedscientist";
   const SHOP = [
     {
@@ -342,11 +365,12 @@ function ShopPage() {
         small commission — your price stays exactly the same. We only list hardware and software that
         appears in the accuracy index.
       </div>
+      <SiteFooter setPage={setPage} />
     </main>
   );
 }
 
-function YouTubePage() {
+function YouTubePage({ setPage }) {
   return (
     <main className="yt-page">
       <div className="yt-frame">
@@ -361,6 +385,50 @@ function YouTubePage() {
         <p className="yt-line">Scientific wearable reviews from Vienna</p>
         <a className="yt-watch" href="https://www.youtube.com/@TheQuantifiedScientist" target="_blank" rel="noopener">Watch on YouTube →</a>
       </div>
+      <SiteFooter setPage={setPage} />
+    </main>
+  );
+}
+
+function AboutPage({ setPage }) {
+  return (
+    <main className="doc-page">
+      <div className="doc-eyebrow">ABOUT</div>
+      <h1 className="doc-title">About Wearable Index</h1>
+      <div className="doc-rule"></div>
+      <p className="lead">Wearable Index is an independent data visualization tool built to make scientific wearable accuracy data more accessible and interactive.</p>
+      <p>All data is sourced from public research published by The Quantified Scientist on YouTube. This site is not affiliated with or endorsed by The Quantified Scientist.</p>
+      <p>Built by an independent developer. For data corrections or partnership inquiries contact us at <a href="mailto:contact@wearableindex.io">contact@wearableindex.io</a>.</p>
+      <SiteFooter setPage={setPage} />
+    </main>
+  );
+}
+
+function ContactPage({ setPage }) {
+  return (
+    <main className="doc-page">
+      <div className="doc-eyebrow">CONTACT</div>
+      <h1 className="doc-title">Contact</h1>
+      <div className="doc-rule"></div>
+      <p className="lead">For inquiries, data corrections or partnership requests reach out at:</p>
+      <a className="doc-mail" href="mailto:contact@wearableindex.io">contact@wearableindex.io</a>
+      <SiteFooter setPage={setPage} />
+    </main>
+  );
+}
+
+function PrivacyPage({ setPage }) {
+  return (
+    <main className="doc-page">
+      <div className="doc-eyebrow">LEGAL</div>
+      <h1 className="doc-title">Privacy Policy</h1>
+      <p className="doc-updated">LAST UPDATED · MAY 2025</p>
+      <div className="doc-rule"></div>
+      <p className="lead">This site uses Google AdSense to display advertisements. AdSense uses cookies to serve ads based on your prior visits to this website or other websites. You may opt out of personalized advertising by visiting <a href="https://adssettings.google.com" target="_blank" rel="noopener">Google's Ads Settings</a>.</p>
+      <p>This site contains affiliate links. If you click and make a purchase we may earn a small commission at no extra cost to you.</p>
+      <p>This site does not collect, store or share any personal data from visitors.</p>
+      <p>Third party links on this site are provided for convenience. We are not responsible for the content or privacy practices of those sites.</p>
+      <SiteFooter setPage={setPage} />
     </main>
   );
 }
@@ -373,4 +441,10 @@ function AdSlot({ size, label }) {
   );
 }
 
-Object.assign(window, { HeroCard, ModePanel, IndexGuide, ChartToolbar, BrandPill, TopBar, SiteHeader, ShopPage, YouTubePage, AdSlot });
+Object.assign(window, {
+  HeroCard, ModePanel, IndexGuide, ChartToolbar, BrandPill,
+  TopBar, SiteHeader, SiteFooter,
+  ShopPage, YouTubePage,
+  AboutPage, ContactPage, PrivacyPage,
+  AdSlot,
+});
