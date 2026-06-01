@@ -254,11 +254,14 @@ function App() {
 
       {page === "shop" && <ShopPage />}
       {page === "youtube" && <YouTubePage />}
+      {page === "privacy" && <PrivacyPage />}
+      {page === "about" && <AboutPage />}
+      {page === "contact" && <ContactPage />}
 
       {t.showAds && <div className="ad-wrap ad-footer"><AdSlot size={[970, 90]} label="FOOTER BANNER ADVERTISEMENT" /></div>}
 
       <footer className="foot">
-        <div>© 2024 WEARABLE INDEX · <a href="Privacy Policy.html">Privacy Policy</a> · <a href="About.html">About</a> · <a href="Contact.html">Contact</a></div>
+        <div>© 2024 WEARABLE INDEX · <a href="#" onClick={(e) => { e.preventDefault(); setPage("privacy"); }}>Privacy Policy</a> · <a href="#" onClick={(e) => { e.preventDefault(); setPage("about"); }}>About</a> · <a href="#" onClick={(e) => { e.preventDefault(); setPage("contact"); }}>Contact</a></div>
         <div className="foot-meta">
           <span><b>{window.HR_DATA.length}</b> DATA POINTS</span>
           <span>·</span>
