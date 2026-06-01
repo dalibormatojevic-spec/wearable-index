@@ -1,0 +1,2050 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Wearables Index — backup snapshot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+/* Wearables Index — styles */
+
+:root {
+  --bg: #F5F4F0;
+  --bg-elev: #FBFAF6;
+  --ink: #111111;
+  --ink-2: #2a2a2a;
+  --muted: #6b6b66;
+  --muted-2: #9a978f;
+  --line: #d9d6cc;
+  --line-2: #ece9df;
+  --accent: #1a1a1a;
+  --ok: #111111;
+  --good: #2c6e49;
+  --fair: #b8860b;
+  --poor: #9e2a2b;
+  --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --maxw: 1400px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: var(--mono); -webkit-font-smoothing: antialiased; }
+body { overflow-x: clip; }
+button { font-family: inherit; cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+code { font-family: inherit; background: #1112; padding: 1px 5px; border-radius: 3px; }
+
+.app { min-height: 100vh; }
+
+/* ── topbar ────────────────────────────────────────────────────────────── */
+.topbar {
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--line);
+}
+.topbar-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 8px 24px;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+}
+.topbar-meta { color: var(--muted); }
+.topbar-meta b { color: var(--ink); }
+.yt-badge { display: inline-flex; align-items: center; margin-right: 7px; vertical-align: -3px; }
+.topbar-actions { display: flex; align-items: center; gap: 16px; }
+.topbar-actions a { color: var(--muted); }
+.topbar-actions a:hover { color: var(--ink); text-decoration: underline; }
+.topbar-cta {
+  background: #FF0000; color: #fff; border: 0; padding: 6px 14px;
+  font: inherit; letter-spacing: 0.08em; font-weight: 600; border-radius: 0;
+}
+.topbar-cta:hover { background: #e60000; }
+
+/* ── ads ───────────────────────────────────────────────────────────────── */
+.ad-wrap { max-width: var(--maxw); margin: 0 auto; padding: 18px 24px 0; }
+.ad-footer { padding-bottom: 18px; padding-top: 18px; }
+.ad-footer .ad { font-size: 13px; }
+.ad {
+  width: var(--ad-w, 728px);
+  height: var(--ad-h, 90px);
+  max-width: 100%;
+  margin: 0 auto;
+  border: 1.5px dashed #C8C4BC;
+  background: repeating-linear-gradient(45deg, transparent 0 14px, rgba(0,0,0,0.012) 14px 15px);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--muted-2);
+  font-size: 11px; letter-spacing: 0.1em;
+}
+
+/* ── site header ───────────────────────────────────────────────────────── */
+.site-header {
+  position: relative;
+  max-width: var(--maxw); margin: 0 auto;
+  padding: 22px 24px 12px;
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px;
+}
+.site-header::after {
+  content: ""; position: absolute; left: 50%; bottom: 0;
+  width: 100vw; transform: translateX(-50%);
+  border-bottom: 1px solid var(--line);
+}
+.brand { display: flex; align-items: center; gap: 12px; }
+.brandmark {
+  width: 28px; height: 28px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+  align-content: center; justify-content: center;
+}
+.brandmark .bm-dot {
+  width: 6px; height: 6px; background: var(--ink); border-radius: 50%;
+}
+.brandmark .bm-dot:nth-child(2) { background: var(--accent); transform: translateY(8px); }
+.brandmark .bm-dot:nth-child(3) { background: var(--ink); transform: translate(8px, -4px); }
+.brand-name { font-weight: 700; letter-spacing: 0.08em; font-size: 14px; }
+.brand-tag { color: var(--muted); font-size: 10px; letter-spacing: 0.08em; margin-top: 2px; }
+
+.nav { display: flex; gap: 28px; justify-content: center; font-size: 13px; }
+.nav a { color: var(--muted); padding: 6px 2px; border-bottom: 1px solid transparent; }
+.nav a:hover { color: var(--ink); }
+.nav a.active { color: var(--ink); border-bottom-color: var(--ink); }
+
+.header-side { display: flex; justify-content: flex-end; }
+.hdr-ic {
+  border: 1px solid var(--line); background: transparent; width: 32px; height: 32px;
+  font-size: 14px; color: var(--ink);
+}
+.hdr-ic:hover { background: var(--line-2); }
+
+/* ── main ──────────────────────────────────────────────────────────────── */
+.main {
+  max-width: var(--maxw); margin: 0 auto; padding: 20px 24px 24px;
+  display: flex; flex-direction: column; gap: 18px;
+}
+
+/* hero */
+.hero {
+  border: 1px solid #1a1a1a;
+  background: var(--bg-elev);
+  padding: 24px 28px;
+  display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: stretch;
+  position: relative;
+}
+.hero::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(0deg, transparent 0 27px, rgba(17,17,17,0.025) 27px 28px);
+}
+.hero-left { position: relative; }
+.hero-eyebrow {
+  display: inline-block; background: var(--ink); color: #f4f1ea;
+  padding: 4px 10px; font-size: 10px; letter-spacing: 0.12em; font-weight: 600;
+}
+.hero-title {
+  font-family: var(--mono); font-weight: 500; font-size: 38px;
+  margin: 14px 0 6px; letter-spacing: -0.01em; line-height: 1.05;
+}
+.hero-sub { color: var(--muted); font-size: 13px; max-width: 56ch; }
+.hero-right { display: flex; gap: 24px; align-items: stretch; }
+.hero-stat { display: flex; flex-direction: column; justify-content: flex-end; min-width: 96px; text-align: right; }
+.hero-val { font-size: 40px; font-weight: 500; letter-spacing: -0.01em; line-height: 1; }
+.hero-val-small { font-size: 32px; }
+.hero-cap { color: var(--muted); font-size: 9px; letter-spacing: 0.12em; margin-top: 8px; }
+.hero-divider { width: 1px; background: var(--line); align-self: stretch; }
+.hero-empty .hero-title { font-size: 24px; }
+
+/* content split */
+.content { display: grid; grid-template-columns: 1fr 280px; gap: 18px; align-items: start; }
+
+.chart-col { display: flex; flex-direction: column; gap: 12px; }
+.chart-head {
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 16px;
+  padding: 6px 2px 2px;
+}
+.ch-eyebrow { font-size: 11px; letter-spacing: 0.12em; color: var(--ink); font-weight: 600; }
+.ch-sub { color: var(--muted); font-size: 12px; max-width: 64ch; margin-top: 4px; }
+.ch-tools { display: flex; gap: 6px; }
+.ch-ic {
+  border: 1px solid var(--line); background: var(--bg-elev);
+  width: 30px; height: 30px; color: var(--muted); font-size: 13px;
+}
+.ch-ic:hover { color: var(--ink); border-color: var(--ink); }
+
+/* ── chart ─────────────────────────────────────────────────────────────── */
+.chart {
+  position: relative;
+  height: 460px;
+  background: var(--bg-elev);
+  border: 1.5px solid #C8C4BC;
+  overflow: hidden;
+}
+.chart-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.chart-msg { display: flex; align-items: center; justify-content: center; }
+.chart-msg-inner { display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; padding: 0 32px; }
+.chart-msg-mark { font-size: 30px; color: var(--muted-2); }
+.chart-msg-text { font-size: 13px; letter-spacing: 0.04em; color: var(--muted); max-width: 38ch; line-height: 1.6; margin: 0; }
+.chart-dots { position: absolute; inset: 0; }
+.dot {
+  position: absolute; width: 10px; height: 10px; border-radius: 50%;
+  border: 1.5px solid #fff;
+  outline: 1px solid rgba(0,0,0,0.18);
+  transform: translate(-50%, -50%);
+  padding: 0; cursor: pointer; transition: transform 120ms ease, box-shadow 120ms ease;
+}
+.dot:hover, .dot.is-hov { transform: translate(-50%, -50%) scale(1.5); z-index: 3; }
+.dot.is-pinned { transform: translate(-50%, -50%) scale(1.7); z-index: 4; }
+
+.tip {
+  position: absolute; pointer-events: none; z-index: 5;
+  background: var(--ink); color: #f4f1ea;
+  padding: 8px 10px; font-size: 11px; line-height: 1.4;
+  max-width: 240px; box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+}
+.tip-name { font-weight: 600; margin-bottom: 2px; }
+.tip-meta { opacity: 0.8; font-size: 10px; letter-spacing: 0.04em; }
+
+.pin-card {
+  position: absolute; z-index: 6;
+  background: #fff; border: 1px solid var(--line);
+  padding: 14px 16px 12px; width: 280px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.10);
+}
+.pin-eyebrow { font-size: 10px; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 6px; }
+.pin-title { font-weight: 600; font-size: 14px; line-height: 1.2; margin-bottom: 10px; word-break: break-word; }
+.pin-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 12px; }
+.pin-val { font-size: 16px; font-weight: 500; }
+.pin-link {
+  display: inline-block; font-size: 11px; letter-spacing: 0.08em;
+  border-bottom: 1px solid var(--ink); padding-bottom: 1px;
+}
+.pin-link:hover { color: var(--accent); border-color: var(--accent); }
+
+/* ── toolbar ───────────────────────────────────────────────────────────── */
+.toolbar {
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  padding: 6px 2px;
+}
+.toolbar-actions { display: flex; gap: 14px; align-items: center; }
+.tb-text {
+  border: 0; background: transparent; padding: 7px 2px;
+  font: inherit; font-size: 11px; letter-spacing: 0.1em; color: var(--muted);
+}
+.tb-text:hover { color: var(--ink); text-decoration: underline; }
+.tb-btn {
+  border: 1px solid var(--ink); background: transparent;
+  padding: 7px 14px; font: inherit; font-size: 11px; letter-spacing: 0.1em;
+  color: var(--ink);
+}
+.tb-btn:hover { background: var(--line-2); }
+.tb-btn.is-on { background: var(--ink); color: #f4f1ea; border-color: var(--ink); }
+
+.toolbar-side { display: flex; align-items: center; gap: 8px; }
+.search {
+  display: flex; align-items: center; border: 1px solid var(--line); padding: 0 8px; background: var(--bg-elev);
+  width: 220px;
+}
+.search-ico { color: var(--muted); font-size: 12px; margin-right: 4px; }
+.search input {
+  border: 0; background: transparent; outline: none; font: inherit; font-size: 12px;
+  flex: 1; padding: 7px 0; color: var(--ink);
+}
+.search input::placeholder { color: var(--muted-2); }
+.search-x { background: transparent; border: 0; color: var(--muted); cursor: pointer; font-size: 14px; }
+.tb-icon {
+  border: 1px solid var(--line); background: transparent;
+  width: 32px; height: 32px; color: var(--muted);
+}
+.tb-icon:hover { color: var(--ink); border-color: var(--ink); }
+
+/* ── pills ─────────────────────────────────────────────────────────────── */
+.pills {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 8px;
+  margin-top: 4px;
+}
+.pill {
+  position: relative;
+  border: 1.5px solid #C8C4BC;
+  background: var(--bg-elev);
+  display: flex; align-items: stretch;
+  transition: opacity 120ms;
+}
+.pill.off .pill-main { opacity: 0.42; }
+.pill.partial { background: var(--bg-elev); }
+.pill.on { border-color: var(--ink); }
+.pill-main {
+  flex: 1;
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 10px;
+  background: transparent; border: 0; text-align: left; font: inherit;
+}
+.pill-swatch { width: 10px; height: 10px; border-radius: 50%; flex: 0 0 auto; }
+.pill-name { font-size: 11px; letter-spacing: 0.08em; font-weight: 600; flex: 1; }
+.pill-count { font-size: 10px; color: var(--muted); letter-spacing: 0.04em; }
+.pill-chev {
+  width: 30px; background: transparent; border: 0; border-left: 1px solid var(--line);
+  color: var(--muted); font-size: 14px; transition: transform 150ms;
+}
+.pill-chev.open { transform: rotate(90deg); color: var(--ink); }
+.pill-chev:hover { color: var(--ink); }
+
+.pill-drawer {
+  position: absolute; top: calc(100% + 4px); left: 0; right: 0; z-index: 100;
+  background: #F5F4F0; border: 1px solid #1a1a1a;
+  max-height: 320px; overflow: auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.row {
+  display: grid; grid-template-columns: auto 1fr auto auto; gap: 8px; align-items: center;
+  padding: 6px 10px; font-size: 11px; cursor: pointer;
+  border-bottom: 1px solid var(--line-2);
+}
+.row:last-child { border-bottom: 0; }
+.row:hover { background: var(--line-2); }
+.row input { accent-color: var(--ink); margin: 0; }
+.row-name { color: var(--ink); }
+.row.on .row-name { font-weight: 600; }
+.row-val { color: var(--muted); font-size: 10px; letter-spacing: 0.04em; min-width: 38px; text-align: right; }
+
+/* ── badges ────────────────────────────────────────────────────────────── */
+.bdg {
+  display: inline-block;
+  padding: 2px 6px;
+  font-size: 9px; letter-spacing: 0.1em; font-weight: 700;
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+.bdg-xs { padding: 1px 5px; font-size: 8px; }
+.bdg-ok   { color: #16a34a; background: #f0fdf4; border-color: #bbf7d0; }
+.bdg-good { color: #2563eb; background: #eff6ff; border-color: #bfdbfe; }
+.bdg-fair { color: #d97706; background: #fffbeb; border-color: #fde68a; }
+.bdg-poor { color: #dc2626; background: #fef2f2; border-color: #fecaca; }
+
+/* ── side rail ─────────────────────────────────────────────────────────── */
+.side { display: flex; flex-direction: column; gap: 14px; position: sticky; top: 14px; }
+.panel {
+  border: 1.5px solid #C8C4BC; background: var(--bg-elev);
+  padding: 14px 16px;
+}
+.panel-title { font-size: 10px; letter-spacing: 0.14em; color: var(--ink); font-weight: 700; margin-bottom: 12px; }
+
+.mode-list { display: flex; flex-direction: column; gap: 4px; }
+.mode-btn {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 10px; border: 1px solid transparent; background: transparent;
+  font: inherit; font-size: 12px; text-align: left;
+  color: var(--ink);
+}
+.mode-btn:hover:not(.active) { background: var(--line-2); }
+.mode-btn.active { background: var(--ink); color: #f4f1ea; }
+.mode-btn.disabled { color: var(--muted-2); cursor: not-allowed; }
+.mode-icon { font-size: 14px; width: 14px; text-align: center; }
+.mode-label { flex: 1; }
+.mode-tag {
+  font-size: 8px; letter-spacing: 0.1em; padding: 2px 5px;
+  background: var(--line); color: var(--muted);
+}
+
+/* HR activity sub-pills */
+.hr-subpills {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin: 6px 0;
+}
+.hr-pill {
+  padding: 6px 11px;
+  background: var(--bg); border: 1px solid var(--line);
+  font: inherit; font-size: 10px; letter-spacing: 0.04em;
+  color: var(--muted-2);
+}
+.hr-pill:hover { color: var(--ink); border-color: var(--muted-2); }
+.hr-pill.active { background: var(--ink); color: #f4f1ea; border-color: var(--ink); font-weight: 600; }
+
+.guide { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.guide li { display: grid; grid-template-columns: 24px 1fr; gap: 8px; font-size: 11px; line-height: 1.4; }
+.g-num { color: var(--muted); font-weight: 600; letter-spacing: 0.06em; }
+.g-title { font-weight: 600; }
+.g-body { color: var(--muted); margin-top: 2px; }
+
+.legend { border: 1.5px solid #C8C4BC; background: var(--bg-elev); padding: 14px 16px; }
+.legend-row { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; font-size: 11px; color: var(--muted); }
+
+/* ── footer ────────────────────────────────────────────────────────────── */
+.foot {
+  position: relative;
+  max-width: var(--maxw); margin: 0 auto;
+  padding: 12px 24px;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 10px; letter-spacing: 0.08em; color: var(--muted);
+}
+.foot::before {
+  content: ""; position: absolute; left: 50%; top: 0; bottom: 0;
+  width: 100vw; transform: translateX(-50%);
+  background: #ECEAE2;
+  border-top: 1.5px solid #8C887F;
+  z-index: 0;
+}
+.foot > * { position: relative; z-index: 1; }
+.foot-meta { display: flex; gap: 12px; }
+.foot-meta b { color: var(--ink); font-weight: 600; }
+
+/* density */
+[data-density="compact"] .hero { padding: 16px 20px; }
+[data-density="compact"] .hero-title { font-size: 28px; }
+[data-density="compact"] .hero-val { font-size: 30px; }
+[data-density="compact"] .chart { height: 380px; }
+[data-density="compact"] .panel, [data-density="compact"] .legend { padding: 10px 12px; }
+[data-density="compact"] .pill-main { padding: 7px 8px; }
+
+@media (max-width: 980px) {
+  .content { grid-template-columns: 1fr; }
+  .side { position: static; }
+  .hero { grid-template-columns: 1fr; gap: 18px; }
+  .hero-right { justify-content: flex-start; }
+}
+
+/* ── shop page ─────────────────────────────────────────────────────────── */
+.shop-main { max-width: var(--maxw); margin: 0 auto; padding: 28px 24px 40px; }
+.shop-head { border-bottom: 1px solid var(--line); padding-bottom: 20px; margin-bottom: 28px; }
+.shop-eyebrow {
+  display: inline-block; background: var(--ink); color: #f4f1ea;
+  padding: 4px 10px; font-size: 10px; letter-spacing: 0.12em; font-weight: 600;
+  margin-bottom: 14px;
+}
+.shop-title { font-size: 38px; font-weight: 500; letter-spacing: -0.01em; line-height: 1.05; margin: 0 0 10px; }
+.shop-sub { color: var(--muted); font-size: 13px; max-width: 70ch; line-height: 1.55; }
+.shop-sub b { color: var(--ink); font-weight: 600; }
+
+.shop-section { margin-bottom: 34px; }
+.shop-section-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.shop-section-title { font-size: 11px; letter-spacing: 0.14em; font-weight: 700; color: var(--ink); white-space: nowrap; }
+.shop-section-rule { flex: 1; height: 1px; background: var(--line); }
+.shop-section-count { font-size: 10px; letter-spacing: 0.08em; color: var(--muted-2); }
+
+.shop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 12px; }
+.shop-card {
+  border: 1.5px solid #C8C4BC; background: var(--bg-elev);
+  padding: 18px 18px 16px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.shop-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.shop-card-name { font-size: 15px; font-weight: 600; line-height: 1.25; }
+.shop-card-code {
+  flex: 0 0 auto;
+  font-size: 9px; letter-spacing: 0.1em; font-weight: 700;
+  color: #d97706; background: #fffbeb; border: 1px solid #fde68a;
+  padding: 3px 7px; white-space: nowrap;
+}
+.shop-card-desc { color: var(--muted); font-size: 12px; line-height: 1.5; flex: 1; }
+.shop-card-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 6px; }
+.shop-card-host { font-size: 10px; letter-spacing: 0.04em; color: var(--muted-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.shop-buy {
+  flex: 0 0 auto;
+  display: inline-block; background: var(--ink); color: #f4f1ea;
+  border: 1px solid var(--ink);
+  padding: 8px 14px; font-size: 11px; letter-spacing: 0.08em; font-weight: 600;
+}
+.shop-buy:hover { background: transparent; color: var(--ink); }
+
+.shop-disclaimer {
+  margin-top: 8px; padding: 14px 16px;
+  border: 1px dashed var(--line); background: var(--bg-elev);
+  font-size: 11px; letter-spacing: 0.04em; color: var(--muted); line-height: 1.6;
+}
+
+@media (max-width: 560px) {
+  .shop-title { font-size: 30px; }
+  .shop-grid { grid-template-columns: 1fr; }
+}
+
+/* ── document pages (privacy / about / contact) ────────────────────────── */
+.doc-page { max-width: 760px; margin: 0 auto; padding: 48px 24px 56px; }
+.doc-eyebrow {
+  display: inline-block; background: var(--ink); color: #f4f1ea;
+  padding: 4px 10px; font-size: 10px; letter-spacing: 0.12em; font-weight: 600;
+  margin-bottom: 16px;
+}
+.doc-title { font-size: 38px; font-weight: 500; letter-spacing: -0.01em; line-height: 1.06; margin: 0 0 8px; }
+.doc-updated { color: var(--muted-2); font-size: 11px; letter-spacing: 0.08em; margin: 0 0 26px; }
+.doc-page p { color: var(--ink-2); font-size: 14px; line-height: 1.7; margin: 0 0 18px; max-width: 68ch; }
+.doc-page p.lead { color: var(--ink); font-size: 15px; }
+.doc-page a { border-bottom: 1px solid currentColor; }
+.doc-page a:hover { color: var(--muted); }
+.doc-rule { height: 1px; background: var(--line); margin: 0 0 28px; }
+.doc-mail {
+  display: inline-block; margin-top: 8px;
+  font-size: clamp(22px, 4vw, 34px); font-weight: 500; letter-spacing: -0.01em;
+  color: var(--ink); border-bottom: 2px solid var(--ink); padding-bottom: 4px;
+}
+.doc-mail:hover { color: var(--muted); border-color: var(--muted); }
+
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script>
+// Brand colors -- intentionally desaturated where they overlap brand identity isn't needed.
+window.BRAND_COLORS = {
+  Amazfit: "#00BCD4",
+  Apple: "#A8A8A8",
+  Coros: "#8BC34A",
+  Garmin: "#E53935",
+  Google: "#FBBC04",
+  Huawei: "#7B1FA2",
+  "Eight Sleep": "#E91E8C",
+  Other: "#333333",
+  Oura: "#FF69B4",
+  Polar: "#FF9800",
+  Samsung: "#9C27B0",
+  Suunto: "#3F51B5",
+  Whoop: "#1565C0",
+  Xiaomi: "#4CAF50",
+};
+
+// Human-readable display names (replaces underscores / camelCase).
+window.prettyName = function (raw) {
+  return raw
+    .replace(/_/g, " ")
+    .replace(/([a-z])([A-Z0-9])/g, "$1 $2")
+    .replace(/\s+/g, " ")
+    .trim();
+};
+
+window.HR_DATA = [
+  // Top performers (from filtered >0.90 chart)
+  { name: "WahooTrackrHrm", brand: "Other", r: 1.00 },
+  { name: "AppleWatch11_46", brand: "Apple", r: 0.99 },
+  { name: "AmazfitHelioStrap_biceps", brand: "Amazfit", r: 0.99 },
+  { name: "AmazfitHelioSleeve", brand: "Amazfit", r: 0.99 },
+  { name: "AppleWatchSE2025", brand: "Apple", r: 0.98 },
+  { name: "PixelWatch4_41mm", brand: "Google", r: 0.98 },
+  { name: "HuaweiWatchGT6", brand: "Huawei", r: 0.98 },
+  { name: "AppleWatchUltra3", brand: "Apple", r: 0.98 },
+  { name: "PolarLoop_biceps", brand: "Polar", r: 0.97 },
+  { name: "MiBand10", brand: "Xiaomi", r: 0.97 },
+  { name: "GarminForerunner970", brand: "Garmin", r: 0.96 },
+  { name: "AmazfitHelioStrap_special", brand: "Amazfit", r: 0.96 },
+  { name: "GarminForerunner570", brand: "Garmin", r: 0.96 },
+  { name: "HuaweiWatchFit4", brand: "Huawei", r: 0.95 },
+  { name: "AmazfitHelioStrap_wrist", brand: "Amazfit", r: 0.95 },
+  { name: "GalaxyWatchUltra2_2025", brand: "Samsung", r: 0.95 },
+  { name: "AmazfitTrex3Pro_44mm", brand: "Amazfit", r: 0.94 },
+  { name: "SuuntoRace2", brand: "Suunto", r: 0.94 },
+  { name: "AmazfitActive3Premium", brand: "Amazfit", r: 0.94 },
+  { name: "AmazfitBalance2", brand: "Amazfit", r: 0.94 },
+  { name: "AmazfitActiveMax", brand: "Amazfit", r: 0.94 },
+  { name: "HuaweiWatchFit4Pro", brand: "Huawei", r: 0.94 },
+  { name: "PowerbeatsProBiceps", brand: "Apple", r: 0.93 },
+  { name: "PolarGritX2", brand: "Polar", r: 0.93 },
+  { name: "HuaweiBand11Pro", brand: "Huawei", r: 0.93 },
+  { name: "WhoopMG_biceps", brand: "Whoop", r: 0.93 },
+  { name: "GarminVenu4", brand: "Garmin", r: 0.93 },
+  { name: "CorosPace4", brand: "Coros", r: 0.92 },
+  { name: "AppleAirPodsPro3", brand: "Apple", r: 0.92 },
+  { name: "GalaxyWatch8_2025", brand: "Samsung", r: 0.92 },
+  { name: "GarminInstinct3", brand: "Garmin", r: 0.91 },
+  { name: "OneplusWatch3", brand: "Other", r: 0.90 },
+  // Lower performers (from full chart)
+  { name: "Loop_autoDetect", brand: "Other", r: 0.700 },
+  { name: "HuaweiBand11_first", brand: "Huawei", r: 0.740 },
+  { name: "Watch4_45mm", brand: "Samsung", r: 0.790 },
+  { name: "OuraRing4", brand: "Oura", r: 0.795 },
+  { name: "HuaweiBand10_second", brand: "Huawei", r: 0.800 },
+  { name: "PolarA300", brand: "Polar", r: 0.802 },
+  { name: "AmazfitDevice", brand: "Amazfit", r: 0.804 },
+  { name: "GarminVivoactive6", brand: "Garmin", r: 0.820 },
+  { name: "GarminTrex_Classic_Pro", brand: "Garmin", r: 0.828 },
+  { name: "AmazfitTrex_Ultra2", brand: "Amazfit", r: 0.832 },
+  { name: "SuuntoVertical2", brand: "Suunto", r: 0.835 },
+  { name: "CmtWatch3_second", brand: "Other", r: 0.838 },
+  { name: "GalaxyWatch8_Classic", brand: "Samsung", r: 0.840 },
+  { name: "HuaweiWatch_Ultimate", brand: "Huawei", r: 0.844 },
+  { name: "AmazfitBip5", brand: "Amazfit", r: 0.847 },
+  { name: "WhoopVoyager", brand: "Whoop", r: 0.848 },
+  { name: "GalaxyWatch3", brand: "Samsung", r: 0.855 },
+  { name: "SuuntoOcean_second", brand: "Suunto", r: 0.858 },
+  { name: "GalaxyWatch5", brand: "Samsung", r: 0.861 },
+  { name: "AmazfitActive4", brand: "Amazfit", r: 0.868 },
+  { name: "PowerbeatsProForearm", brand: "Apple", r: 0.870 },
+  { name: "HuaweiWatch3", brand: "Huawei", r: 0.872 },
+  { name: "AppleWatch3", brand: "Apple", r: 0.875 },
+  { name: "GarminForerunner55", brand: "Garmin", r: 0.878 },
+  { name: "GalaxyWatchFE", brand: "Samsung", r: 0.880 },
+  { name: "SuuntoRace2_old", brand: "Suunto", r: 0.883 },
+  { name: "AmazfitBip5Ultra", brand: "Amazfit", r: 0.885 },
+  { name: "HuaweiWatchGT4Pro", brand: "Huawei", r: 0.888 },
+  { name: "AmazfitHaloStrap_Wrist", brand: "Amazfit", r: 0.890 },
+  { name: "AmazfitBip5_second", brand: "Amazfit", r: 0.892 },
+  { name: "GarminForerunner570_old", brand: "Garmin", r: 0.895 },
+  { name: "AmazfitHaloStrap_special_old", brand: "Amazfit", r: 0.897 },
+  { name: "GarminForerunner_570", brand: "Garmin", r: 0.900 },
+  { name: "GalaxyWatch6Classic", brand: "Samsung", r: 0.903 },
+  { name: "HuaweiWatchGT5", brand: "Huawei", r: 0.905 },
+  { name: "AmazfitT_Rex3_Strap", brand: "Amazfit", r: 0.908 },
+  { name: "CmtWatch3Pro", brand: "Other", r: 0.912 },
+  { name: "AmazfitActive5", brand: "Amazfit", r: 0.915 },
+  { name: "WhoopBiceps", brand: "Whoop", r: 0.918 },
+  { name: "GarminStreet", brand: "Garmin", r: 0.922 },
+  { name: "WhoopBand5Biceps", brand: "Whoop", r: 0.924 },
+  { name: "SuuntoVertical_second", brand: "Suunto", r: 0.926 },
+  { name: "HuaweiWatch4Pro", brand: "Huawei", r: 0.928 },
+  { name: "AmazfitActive6", brand: "Amazfit", r: 0.930 },
+  { name: "GarminFenix8", brand: "Garmin", r: 0.932 },
+  { name: "GarminForerunner265", brand: "Garmin", r: 0.934 },
+  { name: "GarminFenix8_second", brand: "Garmin", r: 0.936 },
+  { name: "GarminForerunnerMax", brand: "Garmin", r: 0.938 },
+  { name: "GalaxyWatch7", brand: "Samsung", r: 0.940 },
+  { name: "AmazfitHaloStrap2025", brand: "Amazfit", r: 0.942 },
+  { name: "CorosVertix3", brand: "Coros", r: 0.944 },
+  { name: "AmazfitHaloSleeve", brand: "Amazfit", r: 0.948 },
+  { name: "Pixel9Pro", brand: "Google", r: 0.952 },
+  { name: "AmazfitHaloBiceps", brand: "Amazfit", r: 0.955 },
+  { name: "WahooTickrFitBiceps", brand: "Other", r: 0.960 },
+  { name: "UMband10", brand: "Other", r: 0.962 },
+  { name: "GarminHRMPro", brand: "Garmin", r: 0.964 },
+  { name: "WahooTickrHrm", brand: "Other", r: 0.968 },
+  { name: "AmazfitHaloStrip2025", brand: "Amazfit", r: 0.970 },
+  { name: "Biceps_401", brand: "Other", r: 0.973 },
+  { name: "Polar_H10", brand: "Polar", r: 0.976 },
+  { name: "GarminHRM_Pro_Plus", brand: "Garmin", r: 0.979 },
+  { name: "Apple_chest", brand: "Apple", r: 0.982 },
+].sort((a, b) => a.r - b.r).map((d, i) => ({ ...d, rank: i + 1 }));
+
+window.SLEEP_DATA = [
+  { name: "AppleWatchUltra3", brand: "Apple", score: 76.0, kappa: 0.72, sensitivity: 80 },
+  { name: "EightSleepPod5", brand: "Eight Sleep", score: 75.0, kappa: 0.70, sensitivity: 80 },
+  { name: "WhoopMG_biceps", brand: "Whoop", score: 71.5, kappa: 0.65, sensitivity: 78 },
+  { name: "AppleWatch11_46", brand: "Apple", score: 70.0, kappa: 0.68, sensitivity: 72 },
+  { name: "PixelWatch4_45mm", brand: "Google", score: 67.5, kappa: 0.65, sensitivity: 70 },
+  { name: "PixelWatch4_41mm", brand: "Google", score: 66.5, kappa: 0.63, sensitivity: 70 },
+  { name: "GalaxyWatch8_2025", brand: "Samsung", score: 65.0, kappa: 0.62, sensitivity: 68 },
+  { name: "GalaxyWatchUltra2_2025", brand: "Samsung", score: 64.0, kappa: 0.60, sensitivity: 68 },
+  { name: "OuraRing4_ceramic", brand: "Oura", score: 62.5, kappa: 0.58, sensitivity: 67 },
+  { name: "GarminFr570_biceps", brand: "Garmin", score: 62.5, kappa: 0.57, sensitivity: 68 },
+  { name: "AmazfitHelioStrap_special", brand: "Amazfit", score: 61.5, kappa: 0.56, sensitivity: 67 },
+  { name: "GalaxyWatch8_classic_2025", brand: "Samsung", score: 60.0, kappa: 0.55, sensitivity: 65 },
+  { name: "AmazfitActiveMax", brand: "Amazfit", score: 59.5, kappa: 0.54, sensitivity: 65 },
+  { name: "AmazfitTrex3Pro", brand: "Amazfit", score: 58.5, kappa: 0.53, sensitivity: 64 },
+  { name: "GarminVenu4", brand: "Garmin", score: 57.5, kappa: 0.52, sensitivity: 63 },
+  { name: "GarminInstinct3", brand: "Garmin", score: 56.5, kappa: 0.51, sensitivity: 62 },
+  { name: "SuuntoVertical2", brand: "Suunto", score: 56.0, kappa: 0.50, sensitivity: 62 },
+  { name: "GarminVenuX1", brand: "Garmin", score: 55.5, kappa: 0.50, sensitivity: 61 },
+  { name: "AmazfitTrexUltra2", brand: "Amazfit", score: 55.5, kappa: 0.49, sensitivity: 62 },
+  { name: "AmazfitHelioStrap_biceps", brand: "Amazfit", score: 55.0, kappa: 0.49, sensitivity: 61 },
+  { name: "MiBand10", brand: "Xiaomi", score: 54.5, kappa: 0.48, sensitivity: 61 },
+  { name: "CmtWatch3Pro", brand: "Other", score: 54.0, kappa: 0.48, sensitivity: 60 },
+  { name: "PolarGritX2", brand: "Polar", score: 53.5, kappa: 0.47, sensitivity: 60 },
+  { name: "GarminForerunner970", brand: "Garmin", score: 52.5, kappa: 0.46, sensitivity: 59 },
+  { name: "GarminForerunner570", brand: "Garmin", score: 52.5, kappa: 0.46, sensitivity: 59 },
+  { name: "AmazfitActive2", brand: "Amazfit", score: 51.5, kappa: 0.45, sensitivity: 58 },
+  { name: "AmazfitBalance2", brand: "Amazfit", score: 51.0, kappa: 0.44, sensitivity: 58 },
+  { name: "OneplusWatch3", brand: "Other", score: 50.5, kappa: 0.44, sensitivity: 57 },
+  { name: "PolarLoop_biceps", brand: "Polar", score: 50.0, kappa: 0.43, sensitivity: 57 },
+  { name: "PolarLoop_autoDetect", brand: "Polar", score: 49.5, kappa: 0.43, sensitivity: 56 },
+  { name: "PolarLoop_onDevice", brand: "Polar", score: 49.0, kappa: 0.42, sensitivity: 56 },
+  { name: "HuaweiWatchFit4", brand: "Huawei", score: 48.5, kappa: 0.41, sensitivity: 56 },
+  { name: "HuaweiBand11Pro", brand: "Huawei", score: 47.5, kappa: 0.40, sensitivity: 55 },
+  { name: "MotoWatch", brand: "Other", score: 46.5, kappa: 0.39, sensitivity: 54 },
+  { name: "HuaweiWatchGT6", brand: "Huawei", score: 45.5, kappa: 0.38, sensitivity: 53 },
+  { name: "HuaweiBand11_second", brand: "Huawei", score: 44.5, kappa: 0.37, sensitivity: 52 },
+  { name: "HuaweiBand11_first", brand: "Huawei", score: 43.5, kappa: 0.35, sensitivity: 52 },
+  { name: "HuaweiWatchGT6Pro", brand: "Huawei", score: 42.5, kappa: 0.34, sensitivity: 51 },
+  { name: "CorosPace4", brand: "Coros", score: 41.5, kappa: 0.33, sensitivity: 50 },
+  { name: "HuaweiBand10_black", brand: "Huawei", score: 39.0, kappa: 0.30, sensitivity: 48 },
+  { name: "HumeBand", brand: "Other", score: 37.0, kappa: 0.28, sensitivity: 46 },
+  { name: "HuaweiWatch5", brand: "Huawei", score: 36.5, kappa: 0.27, sensitivity: 46 },
+  { name: "HuaweiWatchGTRunner2", brand: "Huawei", score: 35.0, kappa: 0.25, sensitivity: 45 },
+].sort((a, b) => b.score - a.score).map((d, i) => ({ ...d, rank: i + 1 }));
+
+window.badgeFor = function (mode, value) {
+  if (mode === "hr") {
+    if (value >= 0.95) return { label: "EXCELLENT", tone: "ok" };
+    if (value >= 0.90) return { label: "GOOD", tone: "good" };
+    return { label: "FAIR", tone: "fair" };
+  }
+  if (value >= 65) return { label: "EXCELLENT", tone: "ok" };
+  if (value >= 50) return { label: "GOOD", tone: "good" };
+  return { label: "FAIR", tone: "fair" };
+};
+
+</script>
+<script type="text/babel">
+
+// tweaks-panel.jsx
+// Reusable Tweaks shell + form-control helpers.
+//
+// Owns the host protocol (listens for __activate_edit_mode / __deactivate_edit_mode,
+// posts __edit_mode_available / __edit_mode_set_keys / __edit_mode_dismissed) so
+// individual prototypes don't re-roll it. Ships a consistent set of controls so you
+// don't hand-draw <input type="range">, segmented radios, steppers, etc.
+//
+// Usage (in an HTML file that loads React + Babel):
+//
+//   const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+//     "primaryColor": "#D97757",
+//     "palette": ["#D97757", "#29261b", "#f6f4ef"],
+//     "fontSize": 16,
+//     "density": "regular",
+//     "dark": false
+//   }/*EDITMODE-END*/;
+//
+//   function App() {
+//     const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+//     return (
+//       <div style={{ fontSize: t.fontSize, color: t.primaryColor }}>
+//         Hello
+//         <TweaksPanel>
+//           <TweakSection label="Typography" />
+//           <TweakSlider label="Font size" value={t.fontSize} min={10} max={32} unit="px"
+//                        onChange={(v) => setTweak('fontSize', v)} />
+//           <TweakRadio  label="Density" value={t.density}
+//                        options={['compact', 'regular', 'comfy']}
+//                        onChange={(v) => setTweak('density', v)} />
+//           <TweakSection label="Theme" />
+//           <TweakColor  label="Primary" value={t.primaryColor}
+//                        options={['#D97757', '#2A6FDB', '#1F8A5B', '#7A5AE0']}
+//                        onChange={(v) => setTweak('primaryColor', v)} />
+//           <TweakColor  label="Palette" value={t.palette}
+//                        options={[['#D97757', '#29261b', '#f6f4ef'],
+//                                  ['#475569', '#0f172a', '#f1f5f9']]}
+//                        onChange={(v) => setTweak('palette', v)} />
+//           <TweakToggle label="Dark mode" value={t.dark}
+//                        onChange={(v) => setTweak('dark', v)} />
+//         </TweaksPanel>
+//       </div>
+//     );
+//   }
+//
+// ─────────────────────────────────────────────────────────────────────────────
+
+const __TWEAKS_STYLE = `
+  .twk-panel{position:fixed;right:16px;bottom:16px;z-index:2147483646;width:280px;
+    max-height:calc(100vh - 32px);display:flex;flex-direction:column;
+    transform:scale(var(--dc-inv-zoom,1));transform-origin:bottom right;
+    background:rgba(250,249,247,.78);color:#29261b;
+    -webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%);
+    border:.5px solid rgba(255,255,255,.6);border-radius:14px;
+    box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 12px 40px rgba(0,0,0,.18);
+    font:11.5px/1.4 ui-sans-serif,system-ui,-apple-system,sans-serif;overflow:hidden}
+  .twk-hd{display:flex;align-items:center;justify-content:space-between;
+    padding:10px 8px 10px 14px;cursor:move;user-select:none}
+  .twk-hd b{font-size:12px;font-weight:600;letter-spacing:.01em}
+  .twk-x{appearance:none;border:0;background:transparent;color:rgba(41,38,27,.55);
+    width:22px;height:22px;border-radius:6px;cursor:default;font-size:13px;line-height:1}
+  .twk-x:hover{background:rgba(0,0,0,.06);color:#29261b}
+  .twk-body{padding:2px 14px 14px;display:flex;flex-direction:column;gap:10px;
+    overflow-y:auto;overflow-x:hidden;min-height:0;
+    scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.15) transparent}
+  .twk-body::-webkit-scrollbar{width:8px}
+  .twk-body::-webkit-scrollbar-track{background:transparent;margin:2px}
+  .twk-body::-webkit-scrollbar-thumb{background:rgba(0,0,0,.15);border-radius:4px;
+    border:2px solid transparent;background-clip:content-box}
+  .twk-body::-webkit-scrollbar-thumb:hover{background:rgba(0,0,0,.25);
+    border:2px solid transparent;background-clip:content-box}
+  .twk-row{display:flex;flex-direction:column;gap:5px}
+  .twk-row-h{flex-direction:row;align-items:center;justify-content:space-between;gap:10px}
+  .twk-lbl{display:flex;justify-content:space-between;align-items:baseline;
+    color:rgba(41,38,27,.72)}
+  .twk-lbl>span:first-child{font-weight:500}
+  .twk-val{color:rgba(41,38,27,.5);font-variant-numeric:tabular-nums}
+
+  .twk-sect{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+    color:rgba(41,38,27,.45);padding:10px 0 0}
+  .twk-sect:first-child{padding-top:0}
+
+  .twk-field{appearance:none;box-sizing:border-box;width:100%;min-width:0;height:26px;padding:0 8px;
+    border:.5px solid rgba(0,0,0,.1);border-radius:7px;
+    background:rgba(255,255,255,.6);color:inherit;font:inherit;outline:none}
+  .twk-field:focus{border-color:rgba(0,0,0,.25);background:rgba(255,255,255,.85)}
+  select.twk-field{padding-right:22px;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='rgba(0,0,0,.5)' d='M0 0h10L5 6z'/></svg>");
+    background-repeat:no-repeat;background-position:right 8px center}
+
+  .twk-slider{appearance:none;-webkit-appearance:none;width:100%;height:4px;margin:6px 0;
+    border-radius:999px;background:rgba(0,0,0,.12);outline:none}
+  .twk-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;
+    width:14px;height:14px;border-radius:50%;background:#fff;
+    border:.5px solid rgba(0,0,0,.12);box-shadow:0 1px 3px rgba(0,0,0,.2);cursor:default}
+  .twk-slider::-moz-range-thumb{width:14px;height:14px;border-radius:50%;
+    background:#fff;border:.5px solid rgba(0,0,0,.12);box-shadow:0 1px 3px rgba(0,0,0,.2);cursor:default}
+
+  .twk-seg{position:relative;display:flex;padding:2px;border-radius:8px;
+    background:rgba(0,0,0,.06);user-select:none}
+  .twk-seg-thumb{position:absolute;top:2px;bottom:2px;border-radius:6px;
+    background:rgba(255,255,255,.9);box-shadow:0 1px 2px rgba(0,0,0,.12);
+    transition:left .15s cubic-bezier(.3,.7,.4,1),width .15s}
+  .twk-seg.dragging .twk-seg-thumb{transition:none}
+  .twk-seg button{appearance:none;position:relative;z-index:1;flex:1;border:0;
+    background:transparent;color:inherit;font:inherit;font-weight:500;min-height:22px;
+    border-radius:6px;cursor:default;padding:4px 6px;line-height:1.2;
+    overflow-wrap:anywhere}
+
+  .twk-toggle{position:relative;width:32px;height:18px;border:0;border-radius:999px;
+    background:rgba(0,0,0,.15);transition:background .15s;cursor:default;padding:0}
+  .twk-toggle[data-on="1"]{background:#34c759}
+  .twk-toggle i{position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;
+    background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:transform .15s}
+  .twk-toggle[data-on="1"] i{transform:translateX(14px)}
+
+  .twk-num{display:flex;align-items:center;box-sizing:border-box;min-width:0;height:26px;padding:0 0 0 8px;
+    border:.5px solid rgba(0,0,0,.1);border-radius:7px;background:rgba(255,255,255,.6)}
+  .twk-num-lbl{font-weight:500;color:rgba(41,38,27,.6);cursor:ew-resize;
+    user-select:none;padding-right:8px}
+  .twk-num input{flex:1;min-width:0;height:100%;border:0;background:transparent;
+    font:inherit;font-variant-numeric:tabular-nums;text-align:right;padding:0 8px 0 0;
+    outline:none;color:inherit;-moz-appearance:textfield}
+  .twk-num input::-webkit-inner-spin-button,.twk-num input::-webkit-outer-spin-button{
+    -webkit-appearance:none;margin:0}
+  .twk-num-unit{padding-right:8px;color:rgba(41,38,27,.45)}
+
+  .twk-btn{appearance:none;height:26px;padding:0 12px;border:0;border-radius:7px;
+    background:rgba(0,0,0,.78);color:#fff;font:inherit;font-weight:500;cursor:default}
+  .twk-btn:hover{background:rgba(0,0,0,.88)}
+  .twk-btn.secondary{background:rgba(0,0,0,.06);color:inherit}
+  .twk-btn.secondary:hover{background:rgba(0,0,0,.1)}
+
+  .twk-swatch{appearance:none;-webkit-appearance:none;width:56px;height:22px;
+    border:.5px solid rgba(0,0,0,.1);border-radius:6px;padding:0;cursor:default;
+    background:transparent;flex-shrink:0}
+  .twk-swatch::-webkit-color-swatch-wrapper{padding:0}
+  .twk-swatch::-webkit-color-swatch{border:0;border-radius:5.5px}
+  .twk-swatch::-moz-color-swatch{border:0;border-radius:5.5px}
+
+  .twk-chips{display:flex;gap:6px}
+  .twk-chip{position:relative;appearance:none;flex:1;min-width:0;height:46px;
+    padding:0;border:0;border-radius:6px;overflow:hidden;cursor:default;
+    box-shadow:0 0 0 .5px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.06);
+    transition:transform .12s cubic-bezier(.3,.7,.4,1),box-shadow .12s}
+  .twk-chip:hover{transform:translateY(-1px);
+    box-shadow:0 0 0 .5px rgba(0,0,0,.18),0 4px 10px rgba(0,0,0,.12)}
+  .twk-chip[data-on="1"]{box-shadow:0 0 0 1.5px rgba(0,0,0,.85),
+    0 2px 6px rgba(0,0,0,.15)}
+  .twk-chip>span{position:absolute;top:0;bottom:0;right:0;width:34%;
+    display:flex;flex-direction:column;box-shadow:-1px 0 0 rgba(0,0,0,.1)}
+  .twk-chip>span>i{flex:1;box-shadow:0 -1px 0 rgba(0,0,0,.1)}
+  .twk-chip>span>i:first-child{box-shadow:none}
+  .twk-chip svg{position:absolute;top:6px;left:6px;width:13px;height:13px;
+    filter:drop-shadow(0 1px 1px rgba(0,0,0,.3))}
+`;
+
+// ── useTweaks ───────────────────────────────────────────────────────────────
+// Single source of truth for tweak values. setTweak persists via the host
+// (__edit_mode_set_keys → host rewrites the EDITMODE block on disk).
+function useTweaks(defaults) {
+  const [values, setValues] = React.useState(defaults);
+  // Accepts either setTweak('key', value) or setTweak({ key: value, ... }) so a
+  // useState-style call doesn't write a "[object Object]" key into the persisted
+  // JSON block.
+  const setTweak = React.useCallback((keyOrEdits, val) => {
+    const edits = typeof keyOrEdits === 'object' && keyOrEdits !== null
+      ? keyOrEdits : { [keyOrEdits]: val };
+    setValues((prev) => ({ ...prev, ...edits }));
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits }, '*');
+    // Same-window signal so in-page listeners (deck-stage rail thumbnails)
+    // can react — the parent message only reaches the host, not peers.
+    window.dispatchEvent(new CustomEvent('tweakchange', { detail: edits }));
+  }, []);
+  return [values, setTweak];
+}
+
+// ── TweaksPanel ─────────────────────────────────────────────────────────────
+// Floating shell. Registers the protocol listener BEFORE announcing
+// availability — if the announce ran first, the host's activate could land
+// before our handler exists and the toolbar toggle would silently no-op.
+// The close button posts __edit_mode_dismissed so the host's toolbar toggle
+// flips off in lockstep; the host echoes __deactivate_edit_mode back which
+// is what actually hides the panel.
+function TweaksPanel({ title = 'Tweaks', children }) {
+  const [open, setOpen] = React.useState(false);
+  const dragRef = React.useRef(null);
+  const offsetRef = React.useRef({ x: 16, y: 16 });
+  const PAD = 16;
+
+  const clampToViewport = React.useCallback(() => {
+    const panel = dragRef.current;
+    if (!panel) return;
+    const w = panel.offsetWidth, h = panel.offsetHeight;
+    const maxRight = Math.max(PAD, window.innerWidth - w - PAD);
+    const maxBottom = Math.max(PAD, window.innerHeight - h - PAD);
+    offsetRef.current = {
+      x: Math.min(maxRight, Math.max(PAD, offsetRef.current.x)),
+      y: Math.min(maxBottom, Math.max(PAD, offsetRef.current.y)),
+    };
+    panel.style.right = offsetRef.current.x + 'px';
+    panel.style.bottom = offsetRef.current.y + 'px';
+  }, []);
+
+  React.useEffect(() => {
+    if (!open) return;
+    clampToViewport();
+    if (typeof ResizeObserver === 'undefined') {
+      window.addEventListener('resize', clampToViewport);
+      return () => window.removeEventListener('resize', clampToViewport);
+    }
+    const ro = new ResizeObserver(clampToViewport);
+    ro.observe(document.documentElement);
+    return () => ro.disconnect();
+  }, [open, clampToViewport]);
+
+  React.useEffect(() => {
+    const onMsg = (e) => {
+      const t = e?.data?.type;
+      if (t === '__activate_edit_mode') setOpen(true);
+      else if (t === '__deactivate_edit_mode') setOpen(false);
+    };
+    window.addEventListener('message', onMsg);
+    window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+    return () => window.removeEventListener('message', onMsg);
+  }, []);
+
+  const dismiss = () => {
+    setOpen(false);
+    window.parent.postMessage({ type: '__edit_mode_dismissed' }, '*');
+  };
+
+  const onDragStart = (e) => {
+    const panel = dragRef.current;
+    if (!panel) return;
+    const r = panel.getBoundingClientRect();
+    const sx = e.clientX, sy = e.clientY;
+    const startRight = window.innerWidth - r.right;
+    const startBottom = window.innerHeight - r.bottom;
+    const move = (ev) => {
+      offsetRef.current = {
+        x: startRight - (ev.clientX - sx),
+        y: startBottom - (ev.clientY - sy),
+      };
+      clampToViewport();
+    };
+    const up = () => {
+      window.removeEventListener('mousemove', move);
+      window.removeEventListener('mouseup', up);
+    };
+    window.addEventListener('mousemove', move);
+    window.addEventListener('mouseup', up);
+  };
+
+  if (!open) return null;
+  return (
+    <>
+      <style>{__TWEAKS_STYLE}</style>
+      <div ref={dragRef} className="twk-panel" data-omelette-chrome=""
+           style={{ right: offsetRef.current.x, bottom: offsetRef.current.y }}>
+        <div className="twk-hd" onMouseDown={onDragStart}>
+          <b>{title}</b>
+          <button className="twk-x" aria-label="Close tweaks"
+                  onMouseDown={(e) => e.stopPropagation()}
+                  onClick={dismiss}>✕</button>
+        </div>
+        <div className="twk-body">
+          {children}
+        </div>
+      </div>
+    </>
+  );
+}
+
+// ── Layout helpers ──────────────────────────────────────────────────────────
+
+function TweakSection({ label, children }) {
+  return (
+    <>
+      <div className="twk-sect">{label}</div>
+      {children}
+    </>
+  );
+}
+
+function TweakRow({ label, value, children, inline = false }) {
+  return (
+    <div className={inline ? 'twk-row twk-row-h' : 'twk-row'}>
+      <div className="twk-lbl">
+        <span>{label}</span>
+        {value != null && <span className="twk-val">{value}</span>}
+      </div>
+      {children}
+    </div>
+  );
+}
+
+// ── Controls ────────────────────────────────────────────────────────────────
+
+function TweakSlider({ label, value, min = 0, max = 100, step = 1, unit = '', onChange }) {
+  return (
+    <TweakRow label={label} value={`${value}${unit}`}>
+      <input type="range" className="twk-slider" min={min} max={max} step={step}
+             value={value} onChange={(e) => onChange(Number(e.target.value))} />
+    </TweakRow>
+  );
+}
+
+function TweakToggle({ label, value, onChange }) {
+  return (
+    <div className="twk-row twk-row-h">
+      <div className="twk-lbl"><span>{label}</span></div>
+      <button type="button" className="twk-toggle" data-on={value ? '1' : '0'}
+              role="switch" aria-checked={!!value}
+              onClick={() => onChange(!value)}><i /></button>
+    </div>
+  );
+}
+
+function TweakRadio({ label, value, options, onChange }) {
+  const trackRef = React.useRef(null);
+  const [dragging, setDragging] = React.useState(false);
+  // The active value is read by pointer-move handlers attached for the lifetime
+  // of a drag — ref it so a stale closure doesn't fire onChange for every move.
+  const valueRef = React.useRef(value);
+  valueRef.current = value;
+
+  // Segments wrap mid-word once per-segment width runs out. The track is
+  // ~248px (280 panel − 28 body pad − 4 seg pad), each button loses 12px
+  // to its own padding, and 11.5px system-ui averages ~6.3px/char — so 2
+  // options fit ~16 chars each, 3 fit ~10. Past that (or >3 options), fall
+  // back to a dropdown rather than wrap.
+  const labelLen = (o) => String(typeof o === 'object' ? o.label : o).length;
+  const maxLen = options.reduce((m, o) => Math.max(m, labelLen(o)), 0);
+  const fitsAsSegments = maxLen <= ({ 2: 16, 3: 10 }[options.length] ?? 0);
+  if (!fitsAsSegments) {
+    // <select> emits strings — map back to the original option value so the
+    // fallback stays type-preserving (numbers, booleans) like the segment path.
+    const resolve = (s) => {
+      const m = options.find((o) => String(typeof o === 'object' ? o.value : o) === s);
+      return m === undefined ? s : typeof m === 'object' ? m.value : m;
+    };
+    return <TweakSelect label={label} value={value} options={options}
+                        onChange={(s) => onChange(resolve(s))} />;
+  }
+  const opts = options.map((o) => (typeof o === 'object' ? o : { value: o, label: o }));
+  const idx = Math.max(0, opts.findIndex((o) => o.value === value));
+  const n = opts.length;
+
+  const segAt = (clientX) => {
+    const r = trackRef.current.getBoundingClientRect();
+    const inner = r.width - 4;
+    const i = Math.floor(((clientX - r.left - 2) / inner) * n);
+    return opts[Math.max(0, Math.min(n - 1, i))].value;
+  };
+
+  const onPointerDown = (e) => {
+    setDragging(true);
+    const v0 = segAt(e.clientX);
+    if (v0 !== valueRef.current) onChange(v0);
+    const move = (ev) => {
+      if (!trackRef.current) return;
+      const v = segAt(ev.clientX);
+      if (v !== valueRef.current) onChange(v);
+    };
+    const up = () => {
+      setDragging(false);
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerup', up);
+    };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+  };
+
+  return (
+    <TweakRow label={label}>
+      <div ref={trackRef} role="radiogroup" onPointerDown={onPointerDown}
+           className={dragging ? 'twk-seg dragging' : 'twk-seg'}>
+        <div className="twk-seg-thumb"
+             style={{ left: `calc(2px + ${idx} * (100% - 4px) / ${n})`,
+                      width: `calc((100% - 4px) / ${n})` }} />
+        {opts.map((o) => (
+          <button key={o.value} type="button" role="radio" aria-checked={o.value === value}>
+            {o.label}
+          </button>
+        ))}
+      </div>
+    </TweakRow>
+  );
+}
+
+function TweakSelect({ label, value, options, onChange }) {
+  return (
+    <TweakRow label={label}>
+      <select className="twk-field" value={value} onChange={(e) => onChange(e.target.value)}>
+        {options.map((o) => {
+          const v = typeof o === 'object' ? o.value : o;
+          const l = typeof o === 'object' ? o.label : o;
+          return <option key={v} value={v}>{l}</option>;
+        })}
+      </select>
+    </TweakRow>
+  );
+}
+
+function TweakText({ label, value, placeholder, onChange }) {
+  return (
+    <TweakRow label={label}>
+      <input className="twk-field" type="text" value={value} placeholder={placeholder}
+             onChange={(e) => onChange(e.target.value)} />
+    </TweakRow>
+  );
+}
+
+function TweakNumber({ label, value, min, max, step = 1, unit = '', onChange }) {
+  const clamp = (n) => {
+    if (min != null && n < min) return min;
+    if (max != null && n > max) return max;
+    return n;
+  };
+  const startRef = React.useRef({ x: 0, val: 0 });
+  const onScrubStart = (e) => {
+    e.preventDefault();
+    startRef.current = { x: e.clientX, val: value };
+    const decimals = (String(step).split('.')[1] || '').length;
+    const move = (ev) => {
+      const dx = ev.clientX - startRef.current.x;
+      const raw = startRef.current.val + dx * step;
+      const snapped = Math.round(raw / step) * step;
+      onChange(clamp(Number(snapped.toFixed(decimals))));
+    };
+    const up = () => {
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerup', up);
+    };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+  };
+  return (
+    <div className="twk-num">
+      <span className="twk-num-lbl" onPointerDown={onScrubStart}>{label}</span>
+      <input type="number" value={value} min={min} max={max} step={step}
+             onChange={(e) => onChange(clamp(Number(e.target.value)))} />
+      {unit && <span className="twk-num-unit">{unit}</span>}
+    </div>
+  );
+}
+
+// Relative-luminance contrast pick — checkmarks drawn over a swatch need to
+// read on both #111 and #fafafa without per-option configuration. Hex input
+// only (#rgb / #rrggbb); named or rgb()/hsl() colors fall through to "light".
+function __twkIsLight(hex) {
+  const h = String(hex).replace('#', '');
+  const x = h.length === 3 ? h.replace(/./g, (c) => c + c) : h.padEnd(6, '0');
+  const n = parseInt(x.slice(0, 6), 16);
+  if (Number.isNaN(n)) return true;
+  const r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
+  return r * 299 + g * 587 + b * 114 > 148000;
+}
+
+const __TwkCheck = ({ light }) => (
+  <svg viewBox="0 0 14 14" aria-hidden="true">
+    <path d="M3 7.2 5.8 10 11 4.2" fill="none" strokeWidth="2.2"
+          strokeLinecap="round" strokeLinejoin="round"
+          stroke={light ? 'rgba(0,0,0,.78)' : '#fff'} />
+  </svg>
+);
+
+// TweakColor — curated color/palette picker. Each option is either a single
+// hex string or an array of 1-5 hex strings; the card adapts — a lone color
+// renders solid, a palette renders colors[0] as the hero (left ~2/3) with the
+// rest stacked in a sharp column on the right. onChange emits the
+// option in the shape it was passed (string stays string, array stays array).
+// Without options it falls back to the native color input for back-compat.
+function TweakColor({ label, value, options, onChange }) {
+  if (!options || !options.length) {
+    return (
+      <div className="twk-row twk-row-h">
+        <div className="twk-lbl"><span>{label}</span></div>
+        <input type="color" className="twk-swatch" value={value}
+               onChange={(e) => onChange(e.target.value)} />
+      </div>
+    );
+  }
+  // Native <input type=color> emits lowercase hex per the HTML spec, so
+  // compare case-insensitively. String() guards JSON.stringify(undefined),
+  // which returns the primitive undefined (no .toLowerCase).
+  const key = (o) => String(JSON.stringify(o)).toLowerCase();
+  const cur = key(value);
+  return (
+    <TweakRow label={label}>
+      <div className="twk-chips" role="radiogroup">
+        {options.map((o, i) => {
+          const colors = Array.isArray(o) ? o : [o];
+          const [hero, ...rest] = colors;
+          const sup = rest.slice(0, 4);
+          const on = key(o) === cur;
+          return (
+            <button key={i} type="button" className="twk-chip" role="radio"
+                    aria-checked={on} data-on={on ? '1' : '0'}
+                    aria-label={colors.join(', ')} title={colors.join(' · ')}
+                    style={{ background: hero }}
+                    onClick={() => onChange(o)}>
+              {sup.length > 0 && (
+                <span>
+                  {sup.map((c, j) => <i key={j} style={{ background: c }} />)}
+                </span>
+              )}
+              {on && <__TwkCheck light={__twkIsLight(hero)} />}
+            </button>
+          );
+        })}
+      </div>
+    </TweakRow>
+  );
+}
+
+function TweakButton({ label, onClick, secondary = false }) {
+  return (
+    <button type="button" className={secondary ? 'twk-btn secondary' : 'twk-btn'}
+            onClick={onClick}>{label}</button>
+  );
+}
+
+Object.assign(window, {
+  useTweaks, TweaksPanel, TweakSection, TweakRow,
+  TweakSlider, TweakToggle, TweakRadio, TweakSelect,
+  TweakText, TweakNumber, TweakColor, TweakButton,
+});
+
+</script>
+<script type="text/babel">
+// chart.jsx — scatter plot for wearable accuracy
+// X-axis = score (R or sleep score). Y-axis = rank slot (top = best).
+// Dots are HTML divs absolutely-positioned over an SVG axis layer
+// so tooltips/pins compose naturally without foreignObject.
+
+const { useEffect, useMemo, useRef, useState } = React;
+
+function Chart({ rows, mode, fullRows, pinned, setPinned, hovered, setHovered }) {
+  // rows: visible items (sorted high→low). fullRows: ALL items in current mode (for rank).
+  const wrapRef = useRef(null);
+  const [size, setSize] = useState({ w: 800, h: 460 });
+
+  useEffect(() => {
+    if (!wrapRef.current) return;
+    const ro = new ResizeObserver(() => {
+      const r = wrapRef.current.getBoundingClientRect();
+      setSize({ w: r.width, h: r.height });
+    });
+    ro.observe(wrapRef.current);
+    return () => ro.disconnect();
+  }, []);
+
+  const valOf = (d) => (mode === "hr" ? d.r : d.score);
+
+  // Axis domain based on visible rows only (zoom to data with a small pad).
+  const { xMin, xMax, ticks } = useMemo(() => {
+    // Sleep: fixed composite-score axis 30–80 (independent of selection).
+    if (mode === "sleep") {
+      return { xMin: 30, xMax: 80, ticks: [30, 40, 50, 60, 70, 80] };
+    }
+    if (!rows.length) {
+      return mode === "hr"
+        ? { xMin: 0.70, xMax: 1.00, ticks: [0.70, 0.80, 0.90, 1.00] }
+        : { xMin: 30, xMax: 80, ticks: [30, 40, 50, 60, 70, 80] };
+    }
+    const vs = rows.map(valOf);
+    let mn = Math.min(...vs);
+    let mx = Math.max(...vs);
+    if (mode === "hr") {
+      // pad to nice 0.01 boundaries, but cap at 1.0
+      mn = Math.max(0.50, Math.floor((mn - 0.01) * 100) / 100);
+      mx = Math.min(1.00, Math.ceil((mx + 0.005) * 100) / 100);
+      if (mx - mn < 0.04) mn = Math.max(0.50, mx - 0.04);
+      const span = mx - mn;
+      const step = span > 0.15 ? 0.05 : span > 0.06 ? 0.02 : 0.01;
+      const ts = [];
+      for (let v = Math.ceil(mn / step) * step; v <= mx + 1e-9; v += step) {
+        ts.push(Math.round(v * 1000) / 1000);
+      }
+      if (ts[0] > mn + 1e-9) ts.unshift(Math.round(mn * 1000) / 1000);
+      if (ts[ts.length - 1] < mx - 1e-9) ts.push(Math.round(mx * 1000) / 1000);
+      return { xMin: mn, xMax: mx, ticks: ts };
+    }
+    mn = Math.floor(mn / 5) * 5;
+    mx = Math.ceil(mx / 5) * 5;
+    if (mx - mn < 10) mn = mx - 10;
+    const step = (mx - mn) > 40 ? 10 : 5;
+    const ts = [];
+    for (let v = mn; v <= mx; v += step) ts.push(v);
+    return { xMin: mn, xMax: mx, ticks: ts };
+  }, [rows, mode]);
+
+  // Layout
+  const padL = 56, padR = 24, padT = 28, padB = 44;
+  const innerW = Math.max(50, size.w - padL - padR);
+  const innerH = Math.max(50, size.h - padT - padB);
+
+  // Rank index within fullRows (so rank survives filtering)
+  const fullRankByName = useMemo(() => {
+    const sorted = [...fullRows].sort((a, b) => valOf(b) - valOf(a));
+    const map = new Map();
+    sorted.forEach((d, i) => map.set(d.name, i + 1));
+    return map;
+  }, [fullRows, mode]);
+
+  // Y position = rank within the visible set (best at top, worst at bottom).
+  // Dots only, no connecting line.
+  const visRankByName = useMemo(() => {
+    const sorted = [...rows].sort((a, b) => valOf(b) - valOf(a));
+    const map = new Map();
+    sorted.forEach((d, i) => map.set(d.name, i));
+    return map;
+  }, [rows, mode]);
+
+  const xScale = (v) => padL + ((v - xMin) / (xMax - xMin || 1)) * innerW;
+  const yScale = (name) => {
+    const n = Math.max(1, rows.length);
+    const idx = visRankByName.get(name) ?? 0; // 0 = best
+    const inset = 26;
+    const usable = Math.max(20, innerH - inset * 2);
+    const t = n > 1 ? idx / (n - 1) : 0.5; // 0 (best) → top, 1 (worst) → bottom
+    return padT + inset + t * usable;
+  };
+
+  const placed = rows.map((d) => {
+    const v = valOf(d);
+    return {
+      d,
+      v,
+      x: xScale(v),
+      y: yScale(d.name),
+      rank: fullRankByName.get(d.name),
+    };
+  });
+
+  // X tick formatter
+  const fmt = (v) => (mode === "hr" ? v.toFixed(v === 1 ? 2 : 3).replace(/0$/, "0") : String(v));
+
+  const onBgClick = () => {
+    setPinned(null);
+    setHovered(null);
+  };
+
+  return (
+    <div className="chart" ref={wrapRef} onClick={onBgClick}>
+      <svg
+        className="chart-svg"
+        width={size.w}
+        height={size.h}
+        viewBox={`0 0 ${size.w} ${size.h}`}
+      >
+        <defs>
+          <pattern id="dotgrid" x="0" y="0" width="14" height="14" patternUnits="userSpaceOnUse">
+            <circle cx="0.6" cy="0.6" r="0.6" fill="#cfccc1" />
+          </pattern>
+        </defs>
+        {/* plot bg */}
+        <rect
+          x={padL}
+          y={padT}
+          width={innerW}
+          height={innerH}
+          fill="url(#dotgrid)"
+          opacity="0.55"
+        />
+        {/* axes */}
+        <line x1={padL} y1={padT + innerH} x2={padL + innerW} y2={padT + innerH} stroke="#1a1a1a" strokeWidth="1" />
+        <line x1={padL} y1={padT} x2={padL} y2={padT + innerH} stroke="#1a1a1a" strokeWidth="1" />
+        {/* x ticks */}
+        {ticks.map((t, i) => {
+          const tx = xScale(t);
+          return (
+            <g key={"x" + i}>
+              <line x1={tx} y1={padT + innerH} x2={tx} y2={padT + innerH + 5} stroke="#1a1a1a" strokeWidth="1" />
+              <text
+                x={tx}
+                y={padT + innerH + 20}
+                textAnchor="middle"
+                fontFamily="JetBrains Mono, monospace"
+                fontSize="11"
+                fill="#6b6b66"
+              >
+                {fmt(t)}
+              </text>
+            </g>
+          );
+        })}
+        {/* axis label */}
+        <text
+          x={padL + innerW / 2}
+          y={size.h - 6}
+          textAnchor="middle"
+          fontFamily="JetBrains Mono, monospace"
+          fontSize="10"
+          fill="#6b6b66"
+          letterSpacing="0.06em"
+        >
+          {mode === "hr" ? "CORRELATION (R) →" : "SLEEP-STAGE SCORE →"}
+        </text>
+        <text
+          x={14}
+          y={padT + innerH / 2}
+          textAnchor="middle"
+          fontFamily="JetBrains Mono, monospace"
+          fontSize="10"
+          fill="#6b6b66"
+          letterSpacing="0.06em"
+          transform={`rotate(-90, 14, ${padT + innerH / 2})`}
+        >
+          RANK — WORST TO BEST
+        </text>
+      </svg>
+
+      {/* dots layer */}
+      <div className="chart-dots" onClick={(e) => e.stopPropagation()}>
+        {placed.map(({ d, x, y, v, rank }) => {
+          const color = window.BRAND_COLORS[d.brand] || "#333";
+          const isPinned = pinned === d.name;
+          const isHov = hovered === d.name;
+          return (
+            <button
+              key={d.name}
+              className={`dot ${isPinned ? "is-pinned" : ""} ${isHov ? "is-hov" : ""}`}
+              style={{
+                left: x,
+                top: y,
+                background: color,
+                boxShadow: isPinned || isHov ? `0 0 0 2px rgba(0,0,0,0.08), 0 0 0 4px ${color}33` : "none",
+              }}
+              onMouseEnter={() => setHovered(d.name)}
+              onMouseLeave={() => setHovered((h) => (h === d.name ? null : h))}
+              onClick={(e) => {
+                e.stopPropagation();
+                setPinned(pinned === d.name ? null : d.name);
+              }}
+              aria-label={`${window.prettyName(d.name)} — ${v}`}
+            />
+          );
+        })}
+        {/* hover tooltip */}
+        {hovered && (() => {
+          const item = placed.find((p) => p.d.name === hovered);
+          if (!item) return null;
+          const right = item.x > size.w * 0.6;
+          return (
+            <div
+              className="tip"
+              style={{
+                left: item.x + (right ? -12 : 12),
+                top: item.y,
+                transform: right ? "translate(-100%, -50%)" : "translate(0, -50%)",
+              }}
+            >
+              <div className="tip-name">{window.prettyName(item.d.name)}</div>
+              <div className="tip-meta">
+                <span style={{ color: window.BRAND_COLORS[item.d.brand] }}>●</span>{" "}
+                {item.d.brand} · #{item.rank} · {mode === "hr" ? "R " + item.v.toFixed(3) : item.v.toFixed(1)}
+              </div>
+            </div>
+          );
+        })()}
+        {/* pinned card */}
+        {pinned && (() => {
+          const item = placed.find((p) => p.d.name === pinned);
+          if (!item) return null;
+          const right = item.x > size.w * 0.55;
+          const badge = window.badgeFor(mode, item.v);
+          return (
+            <div
+              className="pin-card"
+              style={{
+                left: item.x + (right ? -18 : 18),
+                top: item.y - 20,
+                transform: right ? "translate(-100%, 0)" : "translate(0, 0)",
+                borderLeft: `3px solid ${window.BRAND_COLORS[item.d.brand]}`,
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="pin-eyebrow">#{item.rank} · {item.d.brand.toUpperCase()}</div>
+              <div className="pin-title">{window.prettyName(item.d.name)}</div>
+              <div className="pin-row">
+                <span className={`bdg bdg-${badge.tone}`}>{badge.label}</span>
+                <span className="pin-val">{mode === "hr" ? "R " + item.v.toFixed(3) : item.v.toFixed(1)}</span>
+              </div>
+              <a
+                className="pin-link"
+                href="#"
+                onClick={(e) => { e.preventDefault(); alert("Source study link → " + window.prettyName(item.d.name)); }}
+              >
+                View source study →
+              </a>
+            </div>
+          );
+        })()}
+      </div>
+    </div>
+  );
+}
+
+window.Chart = Chart;
+
+</script>
+<script type="text/babel">
+// controls.jsx — hero card, mode switch, brand pills, chart toolbar
+
+const { useState: useState_c, useMemo: useMemo_c } = React;
+
+// Curated display-name + tagline overrides for hero card top pick
+const HERO_LABELS = {
+  hr: {
+    Apple_chest: { name: "Apple Watch Chest Strap", sub: "The gold standard for consumer heart rate tracking accuracy." },
+    GarminHRM_Pro_Plus: { name: "Garmin HRM-Pro Plus", sub: "Lab-grade chest strap accuracy with native multi-sport integration." },
+    Polar_H10: { name: "Polar H10", sub: "Reference-quality ECG chest strap trusted by sports scientists." },
+  },
+  sleep: {
+    AppleWatchUltra3: { name: "Apple Watch Ultra 3", sub: "Best-in-class sleep-stage agreement vs polysomnography." },
+    EightSleepPod5: { name: "Eight Sleep Pod 5", sub: "Top-ranked under-mattress sensor for sleep-stage accuracy." },
+  },
+};
+
+function HeroCard({ topRow, mode, totalVisible, totalAll }) {
+  if (!topRow) {
+    return (
+      <div className="hero hero-empty">
+        <div className="hero-eyebrow">NO DEVICES SELECTED</div>
+        <div className="hero-title">Activate brands to populate the index.</div>
+        <div className="hero-sub">Pick a brand pill below or hit <code>ACTIVATE ALL</code>.</div>
+      </div>
+    );
+  }
+  const v = mode === "hr" ? topRow.r : topRow.score;
+  const valDisp = mode === "hr" ? v.toFixed(3) : v.toFixed(1);
+  const valLbl = mode === "hr" ? "R SCORE" : "SLEEP SCORE";
+  const override = (HERO_LABELS[mode] || {})[topRow.name];
+  const displayName = override?.name || window.prettyName(topRow.name);
+  const displaySub = override?.sub
+    || (mode === "hr"
+      ? `Top correlation to ECG reference among ${totalVisible} selected device${totalVisible === 1 ? "" : "s"}.`
+      : `Highest sleep-stage agreement among ${totalVisible} selected device${totalVisible === 1 ? "" : "s"}.`);
+  return (
+    <div className="hero">
+      <div className="hero-left">
+        <div className="hero-eyebrow">CURRENT TOP PICK</div>
+        <h1 className="hero-title">{displayName}</h1>
+        <div className="hero-sub">{displaySub}</div>
+      </div>
+      <div className="hero-right">
+        <div className="hero-stat">
+          <div className="hero-val">{valDisp}</div>
+          <div className="hero-cap">{valLbl}</div>
+        </div>
+        <div className="hero-divider" aria-hidden="true" />
+        <div className="hero-stat">
+          <div className="hero-val hero-val-small">100%</div>
+          <div className="hero-cap">BEATS SELECTED</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ModePanel({ mode, setMode, hrSubMode, setHrSubMode }) {
+  const HR_SUBS = ["Running", "Spinning", "Cycling", "Weightlifting"];
+  return (
+    <div className="panel">
+      <div className="panel-title">INSTRUMENT MODE</div>
+      <div className="mode-list">
+        <button
+          className={`mode-btn ${mode === "hr" ? "active" : ""}`}
+          onClick={() => { setMode("hr"); setHrSubMode(null); }}
+        >
+          <span className="mode-icon">♥</span>
+          <span className="mode-label">Heart Rate</span>
+        </button>
+        {mode === "hr" && (
+          <div className="hr-subpills">
+            {HR_SUBS.map((s) => (
+              <button
+                key={s}
+                className={`hr-pill ${hrSubMode === s ? "active" : ""}`}
+                onClick={() => setHrSubMode(s)}
+              >
+                {s}
+              </button>
+            ))}
+          </div>
+        )}
+        <button
+          className={`mode-btn ${mode === "sleep" ? "active" : ""}`}
+          onClick={() => setMode("sleep")}
+        >
+          <span className="mode-icon">☾</span>
+          <span className="mode-label">Sleep</span>
+        </button>
+        <button
+          className={`mode-btn ${mode === "steps" ? "active" : ""}`}
+          onClick={() => setMode("steps")}
+        >
+          <span className="mode-icon">↗</span>
+          <span className="mode-label">Steps</span>
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function IndexGuide() {
+  const items = [
+    ["01", "Choose Metric", "Select heart rate, sleep, or battery performance metrics."],
+    ["02", "Select Hardware", "Filter by brands like Apple, Garmin, or Whoop."],
+    ["03", "Compare R-Score", "Higher correlation (closer to 1.0) means higher accuracy."],
+    ["04", "View Reviews", "Click data points to link to specific video review deep-dives."],
+  ];
+  return (
+    <div className="panel">
+      <div className="panel-title">INDEX GUIDE</div>
+      <ol className="guide">
+        {items.map(([n, t, b]) => (
+          <li key={n}>
+            <span className="g-num">{n}</span>
+            <div>
+              <div className="g-title">{t}</div>
+              <div className="g-body">{b}</div>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  );
+}
+
+function ChartToolbar({ onActivateAll, onDeactivateAll, onTop10, isTop10 }) {
+  return (
+    <div className="toolbar">
+      <div className="toolbar-actions">
+        <button className="tb-text" onClick={onActivateAll}>ACTIVATE ALL</button>
+        <button className="tb-text" onClick={onDeactivateAll}>DEACTIVATE ALL</button>
+        <button className={`tb-btn ${isTop10 ? "is-on" : ""}`} onClick={onTop10}>TOP 10 ACCURACY</button>
+      </div>
+    </div>
+  );
+}
+
+function BrandPill({ brand, devices, activeSet, onToggleBrand, onToggleDevice, mode }) {
+  const [open, setOpen] = useState_c(false);
+  const rootRef = React.useRef(null);
+  const color = window.BRAND_COLORS[brand] || "#333";
+
+  // Close the device drawer when clicking anywhere outside this pill.
+  React.useEffect(() => {
+    if (!open) return;
+    const onDocClick = (e) => {
+      if (rootRef.current && !rootRef.current.contains(e.target)) setOpen(false);
+    };
+    const onKey = (e) => { if (e.key === "Escape") setOpen(false); };
+    document.addEventListener("mousedown", onDocClick);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDocClick);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  const activeCount = devices.filter((d) => activeSet.has(d.name)).length;
+  const total = devices.length;
+  const allOn = activeCount === total;
+  const someOn = activeCount > 0 && !allOn;
+  const isActive = activeCount > 0;
+
+  // Brand badge: determined by the highest-scoring device in this brand.
+  const vs = devices.map((d) => (mode === "hr" ? d.r : d.score));
+  const best = vs.length ? Math.max(...vs) : 0;
+  const badge = window.badgeFor(mode, best);
+
+  return (
+    <div ref={rootRef} className={`pill ${allOn ? "on" : someOn ? "partial" : "off"}`}>
+      <button className="pill-main" onClick={() => onToggleBrand(brand)}>
+        <span className="pill-swatch" style={{ background: color }} />
+        <span className="pill-name">{brand.toUpperCase()}</span>
+        <span className={`bdg bdg-${badge.tone}`}>{badge.label}</span>
+        <span className="pill-count">{activeCount}/{total}</span>
+      </button>
+      <button
+        className={`pill-chev ${open ? "open" : ""}`}
+        onClick={() => setOpen((o) => !o)}
+        aria-label="Expand devices"
+      >
+        ⌄
+      </button>
+      {open && (
+        <div className="pill-drawer">
+          {devices
+            .slice()
+            .sort((a, b) => (mode === "hr" ? b.r - a.r : b.score - a.score))
+            .map((d) => {
+              const on = activeSet.has(d.name);
+              const v = mode === "hr" ? d.r : d.score;
+              const b = window.badgeFor(mode, v);
+              return (
+                <label key={d.name} className={`row ${on ? "on" : ""}`}>
+                  <input
+                    type="checkbox"
+                    checked={on}
+                    onChange={() => onToggleDevice(d.name)}
+                  />
+                  <span className="row-name">{window.prettyName(d.name)}</span>
+                  <span className={`bdg bdg-${b.tone} bdg-xs`}>{b.label}</span>
+                  <span className="row-val">{mode === "hr" ? v.toFixed(3) : v.toFixed(1)}</span>
+                </label>
+              );
+            })}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function TopBar() {
+  return (
+    <div className="topbar">
+      <div className="topbar-inner">
+        <span className="topbar-meta">
+          <span className="yt-badge" aria-hidden="true">
+            <svg viewBox="0 0 28 20" width="20" height="15">
+              <rect width="28" height="20" rx="5" fill="#FF0000" />
+              <path d="M11 6 L20 10 L11 14 Z" fill="#fff" />
+            </svg>
+          </span>
+          Featured on <b>The Quantified Scientist</b> — scientific wearable reviews from Vienna
+        </span>
+        <div className="topbar-actions">
+          <a href="#" onClick={(e) => e.preventDefault()}>Watch latest review →</a>
+          <button className="topbar-cta" onClick={() => alert("Become a Member — placeholder")}>BECOME A MEMBER</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SiteHeader() {
+  return (
+    <header className="site-header">
+      <div className="brand">
+        <div className="brand-name">WEARABLE INDEX</div>
+      </div>
+      <nav className="nav">
+        <a className="active" href="#">Research</a>
+        <a href="Shop the Index.html">Shop the Index</a>
+        <a href="YouTube.html">YouTube</a>
+      </nav>
+      <div className="header-side">
+        <button className="hdr-ic" aria-label="Account">◌</button>
+      </div>
+    </header>
+  );
+}
+
+function AdSlot({ size, label }) {
+  return (
+    <div className="ad" style={{ "--ad-w": size[0] + "px", "--ad-h": size[1] + "px" }}>
+      <span>{size[0]}×{size[1]} · {label}</span>
+    </div>
+  );
+}
+
+Object.assign(window, { HeroCard, ModePanel, IndexGuide, ChartToolbar, BrandPill, TopBar, SiteHeader, AdSlot });
+
+</script>
+<script type="text/babel">
+// app.jsx — main Wearables Index app
+
+const { useState, useEffect, useMemo, useRef } = React;
+
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "accent": "#1a1a1a",
+  "chartStyle": "scatter",
+  "showAds": true,
+  "badgeStyle": "outline",
+  "density": "regular"
+}/*EDITMODE-END*/;
+
+function App() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+
+  // ── mode ─────────────────────────────────────────────────────────────────
+  const [mode, setMode] = useState("hr");
+  // hrSubMode: null = combined/average across activities; otherwise a specific activity.
+  const [hrSubMode, setHrSubMode] = useState(null);
+  const DATA = mode === "sleep" ? window.SLEEP_DATA : mode === "hr" ? window.HR_DATA : [];
+  const valOf = (d) => (mode === "sleep" ? d.score : d.r);
+
+  // Coming-soon states: Steps has no data yet; HR activities other than Running
+  // (and the combined view) aren't published yet. When set, the chart area shows this.
+  const chartMessage =
+    mode === "steps"
+      ? "Step Count data coming soon — check back after our next update"
+      : mode === "hr" && hrSubMode && hrSubMode !== "Running"
+        ? "Data coming soon — check back after our next update"
+        : null;
+
+  // ── per-mode active sets (preserved across mode switches) ────────────────
+  // Default: Top 10 most-accurate devices active for each mode.
+  const top10Names = (rows, key) =>
+    new Set([...rows].sort((a, b) => b[key] - a[key]).slice(0, 10).map((d) => d.name));
+  const [activeByMode, setActiveByMode] = useState(() => ({
+    hr: top10Names(window.HR_DATA, "r"),
+    sleep: top10Names(window.SLEEP_DATA, "score"),
+    steps: new Set(),
+  }));
+  const activeSet = activeByMode[mode] || new Set();
+  const setActive = (next) =>
+    setActiveByMode((prev) => ({ ...prev, [mode]: next instanceof Set ? next : new Set(next) }));
+
+  // ── ui state ─────────────────────────────────────────────────────────────
+  const [pinned, setPinned] = useState(null);
+  const [hovered, setHovered] = useState(null);
+  const [search, setSearch] = useState("");
+  const [isTop10, setIsTop10] = useState(true);
+
+  // Close the pinned device card when clicking anywhere outside it, or on Escape.
+  useEffect(() => {
+    if (!pinned) return;
+    const onDocClick = (e) => {
+      if (e.target.closest && e.target.closest(".pin-card, .dot")) return;
+      setPinned(null);
+    };
+    const onKey = (e) => { if (e.key === "Escape") setPinned(null); };
+    document.addEventListener("mousedown", onDocClick);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDocClick);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [pinned]);
+
+  // URL state (#mode=hr&n=42 — just persist mode + count for shareability)
+  useEffect(() => {
+    const params = new URLSearchParams();
+    params.set("mode", mode);
+    params.set("n", String(activeSet.size));
+    window.history.replaceState(null, "", "#" + params.toString());
+  }, [mode, activeSet]);
+
+  // ── derived ──────────────────────────────────────────────────────────────
+  const byBrand = useMemo(() => {
+    const map = new Map();
+    DATA.forEach((d) => {
+      if (!map.has(d.brand)) map.set(d.brand, []);
+      map.get(d.brand).push(d);
+    });
+    return map;
+  }, [DATA]);
+
+  // Brand order: by descending best-score within brand
+  const brandOrder = useMemo(() => {
+    return [...byBrand.entries()]
+      .map(([b, devs]) => [b, Math.max(...devs.map(valOf))])
+      .sort((a, b) => b[1] - a[1])
+      .map(([b]) => b);
+  }, [byBrand, mode]);
+
+  // Visible (active + search filter), sorted high → low
+  const visibleRows = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    return DATA.filter((d) => activeSet.has(d.name))
+      .filter((d) => !q || window.prettyName(d.name).toLowerCase().includes(q) || d.brand.toLowerCase().includes(q))
+      .sort((a, b) => valOf(b) - valOf(a));
+  }, [DATA, activeSet, search, mode]);
+
+  const topRow = visibleRows[0] || null;
+
+  // ── actions ──────────────────────────────────────────────────────────────
+  const activateAll = () => {
+    setActive(new Set(DATA.map((d) => d.name)));
+    setIsTop10(false);
+  };
+  const deactivateAll = () => {
+    setActive(new Set());
+    setIsTop10(false);
+    setPinned(null);
+  };
+  const top10 = () => {
+    if (isTop10) {
+      activateAll();
+      return;
+    }
+    const top = [...DATA].sort((a, b) => valOf(b) - valOf(a)).slice(0, 10);
+    setActive(new Set(top.map((d) => d.name)));
+    setIsTop10(true);
+  };
+  const toggleBrand = (brand) => {
+    const devs = byBrand.get(brand) || [];
+    // Active = any device on. Clicking an active brand deactivates it;
+    // clicking a deactivated brand reactivates all its devices.
+    const anyOn = devs.some((d) => activeSet.has(d.name));
+    const next = new Set(activeSet);
+    if (anyOn) devs.forEach((d) => next.delete(d.name));
+    else devs.forEach((d) => next.add(d.name));
+    setActive(next);
+    setIsTop10(false);
+  };
+  const toggleDevice = (name) => {
+    const next = new Set(activeSet);
+    if (next.has(name)) next.delete(name);
+    else next.add(name);
+    setActive(next);
+    setIsTop10(false);
+  };
+  const exportCsv = () => {
+    const head = mode === "hr"
+      ? ["rank", "device", "brand", "r_score", "badge"]
+      : ["rank", "device", "brand", "score", "kappa", "sensitivity", "badge"];
+    const lines = [head.join(",")];
+    visibleRows.forEach((d, i) => {
+      const v = valOf(d);
+      const b = window.badgeFor(mode, v).label;
+      if (mode === "hr") {
+        lines.push([i + 1, window.prettyName(d.name), d.brand, v.toFixed(3), b].join(","));
+      } else {
+        lines.push([i + 1, window.prettyName(d.name), d.brand, v.toFixed(1), d.kappa, d.sensitivity, b].join(","));
+      }
+    });
+    const blob = new Blob([lines.join("\n")], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `wearables-index-${mode}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  // When mode changes, drop any pin (different dataset)
+  useEffect(() => {
+    setPinned(null);
+    setHovered(null);
+    setSearch("");
+  }, [mode]);
+
+  // density
+  useEffect(() => {
+    document.documentElement.dataset.density = t.density;
+    document.documentElement.style.setProperty("--accent", t.accent);
+  }, [t.density, t.accent]);
+
+  return (
+    <div className="app">
+      <TopBar />
+      {t.showAds && (
+        <div className="ad-wrap"><AdSlot size={[728, 90]} label="LEADERBOARD ADVERTISEMENT" /></div>
+      )}
+      <SiteHeader />
+
+      <main className="main">
+        <HeroCard
+          topRow={chartMessage ? null : topRow}
+          mode={mode}
+          totalVisible={chartMessage ? 0 : visibleRows.length}
+          totalAll={DATA.length}
+        />
+
+        <div className="content">
+          <section className="chart-col">
+            <div className="chart-head">
+              <div>
+                <div className="ch-eyebrow">{mode === "hr" ? "HEART RATE ACCURACY" : mode === "sleep" ? "SLEEP-STAGE ACCURACY" : "STEP COUNT ACCURACY"}</div>
+                <div className="ch-sub">
+                  {mode === "hr"
+                    ? "Correlation (R) to ECG Reference Chest Strap during varied cycling & running."
+                    : mode === "sleep"
+                      ? "Composite agreement vs polysomnography — Cohen's κ × stage sensitivity, normalized 0–100."
+                      : "Step-count agreement vs manual reference across walking & running protocols."}
+                </div>
+              </div>
+              <div className="ch-tools">
+                <button className="ch-ic" title="Reset zoom" onClick={() => { setPinned(null); setHovered(null); }}>❐</button>
+                <button className="ch-ic" title="Export CSV" onClick={exportCsv}>⬇</button>
+              </div>
+            </div>
+
+            {chartMessage ? (
+              <div className="chart chart-msg">
+                <div className="chart-msg-inner">
+                  <span className="chart-msg-mark" aria-hidden="true">◷</span>
+                  <p className="chart-msg-text">{chartMessage}</p>
+                </div>
+              </div>
+            ) : (
+              <Chart
+                rows={visibleRows}
+                fullRows={DATA}
+                mode={mode}
+                pinned={pinned}
+                setPinned={setPinned}
+                hovered={hovered}
+                setHovered={setHovered}
+              />
+            )}
+
+            <ChartToolbar
+              onActivateAll={activateAll}
+              onDeactivateAll={deactivateAll}
+              onTop10={top10}
+              isTop10={isTop10}
+            />
+
+            <div className="pills">
+              {brandOrder.map((b) => (
+                <BrandPill
+                  key={b}
+                  brand={b}
+                  devices={byBrand.get(b)}
+                  activeSet={activeSet}
+                  onToggleBrand={toggleBrand}
+                  onToggleDevice={toggleDevice}
+                  mode={mode}
+                />
+              ))}
+            </div>
+          </section>
+
+          <aside className="side">
+            <ModePanel mode={mode} setMode={setMode} hrSubMode={hrSubMode} setHrSubMode={setHrSubMode} />
+            <IndexGuide />
+            {t.showAds && <AdSlot size={[300, 250]} label="ADVERTISEMENT" />}
+          </aside>
+        </div>
+      </main>
+
+      {t.showAds && <div className="ad-wrap ad-footer"><AdSlot size={[970, 90]} label="FOOTER BANNER ADVERTISEMENT" /></div>}
+
+      <footer className="foot">
+        <div>© 2024 WEARABLE INDEX · <a href="Privacy Policy.html">Privacy Policy</a> · <a href="About.html">About</a> · <a href="Contact.html">Contact</a></div>
+        <div className="foot-meta">
+          <span><b>{window.HR_DATA.length}</b> DATA POINTS</span>
+          <span>·</span>
+          <span><b>{new Set(window.HR_DATA.map((d) => d.brand)).size}</b> BRANDS</span>
+          <span>·</span>
+          <span>REVISED: MAY 29</span>
+        </div>
+      </footer>
+
+      <TweaksPanel>
+        <TweakSection label="Display" />
+        <TweakRadio
+          label="Density"
+          value={t.density}
+          options={["compact", "regular"]}
+          onChange={(v) => setTweak("density", v)}
+        />
+        <TweakToggle
+          label="Show ad placeholders"
+          value={t.showAds}
+          onChange={(v) => setTweak("showAds", v)}
+        />
+        <TweakSection label="Color" />
+        <TweakColor
+          label="Accent"
+          value={t.accent}
+          options={["#1a1a1a", "#1f4e8a", "#1f8a5b", "#b8860b"]}
+          onChange={(v) => setTweak("accent", v)}
+        />
+      </TweaksPanel>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+
+</script>
+</body>
+</html>

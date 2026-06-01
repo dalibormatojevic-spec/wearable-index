@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>YouTube — Wearable Index</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap"
+  rel="stylesheet"
+/>
+<link rel="stylesheet" href="styles.css" />
+<style>
+  #root { display: flex; flex-direction: column; min-height: 100vh; }
+  #root > .topbar, #root > .site-header, #root > .foot, #root > .ad-wrap { width: 100%; }
+  .yt-page {
+    flex: 1;
+    max-width: var(--maxw); margin: 0 auto; width: 100%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 64px 24px;
+  }
+  .yt-frame {
+    border: 1px solid #C8C4BC;
+    padding: 48px 56px 44px;
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .yt-mark { display: inline-flex; margin-bottom: 26px; }
+  .yt-eyebrow {
+    display: inline-block; background: var(--ink); color: #f4f1ea;
+    padding: 4px 10px; font-size: 10px; letter-spacing: 0.12em; font-weight: 600;
+    margin-bottom: 18px;
+  }
+  .yt-title { font-size: 48px; font-weight: 500; letter-spacing: -0.01em; line-height: 1.04; margin: 0 0 12px; }
+  .yt-line { color: var(--muted); font-size: 14px; letter-spacing: 0.02em; margin: 0 0 34px; }
+  .yt-watch {
+    display: inline-block; background: #FF0000; color: #fff;
+    border: 1px solid #FF0000;
+    padding: 16px 28px; font-size: 14px; letter-spacing: 0.06em; font-weight: 600;
+    text-decoration: none;
+  }
+  .yt-watch:hover { background: #e60000; border-color: #e60000; }
+  @media (max-width: 560px) {
+    .yt-title { font-size: 34px; }
+  }
+</style>
+</head>
+<body>
+<div id="root">
+
+  <!-- topbar -->
+  <div class="topbar">
+    <div class="topbar-inner">
+      <span class="topbar-meta">
+        <span class="yt-badge" aria-hidden="true">
+          <svg viewBox="0 0 28 20" width="20" height="15">
+            <rect width="28" height="20" rx="5" fill="#FF0000"></rect>
+            <path d="M11 6 L20 10 L11 14 Z" fill="#fff"></path>
+          </svg>
+        </span>
+        Featured on <b>The Quantified Scientist</b> — scientific wearable reviews from Vienna
+      </span>
+      <div class="topbar-actions">
+        <a href="https://www.youtube.com/@TheQuantifiedScientist" target="_blank" rel="noopener">Watch latest review →</a>
+        <a class="topbar-cta" href="https://www.youtube.com/channel/UChNWxrTlmh4IRSevon1X93g/join" target="_blank" rel="noopener" style="text-decoration:none;color:#fff;">BECOME A MEMBER</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- header -->
+  <header class="site-header">
+    <div class="brand">
+      <div class="brand-name">WEARABLE INDEX</div>
+    </div>
+    <nav class="nav">
+      <a href="Wearables Index.html">Research</a>
+      <a href="Shop the Index.html">Shop the Index</a>
+      <a class="active" href="YouTube.html">YouTube</a>
+    </nav>
+    <div class="header-side">
+      <button class="hdr-ic" aria-label="Account">◌</button>
+    </div>
+  </header>
+
+  <!-- youtube content -->
+  <main class="yt-page">
+    <div class="yt-frame">
+      <span class="yt-mark" aria-hidden="true">
+        <svg viewBox="0 0 28 20" width="64" height="46">
+          <rect width="28" height="20" rx="6" fill="#FF0000"></rect>
+          <path d="M11 6 L20 10 L11 14 Z" fill="#fff"></path>
+        </svg>
+      </span>
+      <div class="yt-eyebrow">CHANNEL</div>
+      <h1 class="yt-title">The Quantified Scientist</h1>
+      <p class="yt-line">Scientific wearable reviews from Vienna</p>
+      <a class="yt-watch" href="https://www.youtube.com/@TheQuantifiedScientist" target="_blank" rel="noopener">Watch on YouTube →</a>
+    </div>
+  </main>
+
+  <!-- footer banner ad -->
+  <div class="ad-wrap ad-footer"><div class="ad" style="--ad-w:970px;--ad-h:90px;"><span>970×90 · FOOTER BANNER ADVERTISEMENT</span></div></div>
+
+  <!-- footer -->
+  <footer class="foot">
+    <div>© 2024 WEARABLE INDEX · Pitch concept for high-precision biometric visualization.</div>
+    <div class="foot-meta">
+      <span>SCIENTIFIC WEARABLE REVIEWS</span>
+      <span>·</span>
+      <span>REVISED: MAY 31</span>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Wearables Index — print</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap"
+  rel="stylesheet"
+/>
+<link rel="stylesheet" href="styles.css" />
+<style>
+  /* ── screen tweaks for print preview ─────────────────────────────────── */
+  /* widen container so chart breathes on the page */
+  :root { --maxw: 1040px; }
+
+  /* ── print rules ─────────────────────────────────────────────────────── */
+  @page { size: A4 portrait; margin: 11mm 11mm; }
+
+  @media print {
+    html, body {
+      background: var(--bg) !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* hide only interactive-only chrome that has no place on paper */
+    .twk-panel,
+    .twk-fab,
+    [data-tweaks-fab],
+    .ch-tools,
+    .pill-chev { display: none !important; }
+
+    /* keep the full topbar (red CTA, links) as part of the captured design */
+    .topbar-actions a { text-decoration: none; }
+
+    .site-header { padding: 16px 0 10px !important; }
+    .main { padding: 14px 0 !important; gap: 14px !important; }
+
+    /* the leaderboard ad sits on page 1; footer ad flows naturally */
+    .ad-wrap { padding-left: 0 !important; padding-right: 0 !important; }
+
+    .hero { break-inside: avoid; }
+    .content { grid-template-columns: 1fr 240px !important; gap: 14px !important; }
+    .chart { height: 380px !important; break-inside: avoid; }
+    .side { position: static !important; }
+
+    .pills { break-inside: avoid; }
+    .pill { break-inside: avoid; }
+    .pill-drawer { display: none !important; }
+
+    .foot { break-inside: avoid; }
+
+    /* avoid awkward splits */
+    section, aside, .panel, .chart, .hero, .toolbar { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script src="data.js"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="chart.jsx"></script>
+<script type="text/babel" src="controls.jsx"></script>
+<script type="text/babel" src="app.jsx"></script>
+
+<script type="text/babel" data-presets="env,react">
+  // Wait until React has mounted, fonts are loaded, then print.
+  (async () => {
+    const waitForRoot = () =>
+      new Promise((resolve) => {
+        const check = () => {
+          const r = document.getElementById("root");
+          if (r && r.querySelector(".chart")) resolve();
+          else requestAnimationFrame(check);
+        };
+        check();
+      });
+    await waitForRoot();
+    if (document.fonts && document.fonts.ready) {
+      try { await document.fonts.ready; } catch (e) {}
+    }
+    // small settle delay for ResizeObserver + chart layout
+    await new Promise((r) => setTimeout(r, 700));
+    window.print();
+  })();
+</script>
+</body>
+</html>
