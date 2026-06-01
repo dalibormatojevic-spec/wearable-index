@@ -256,6 +256,46 @@ function SiteHeader({ page, setPage }) {
   );
 }
 
+function PrivacyPage() {
+  return (
+    <main className="doc-page">
+      <div className="doc-eyebrow">LEGAL</div>
+      <h1 className="doc-title">Privacy Policy</h1>
+      <p className="doc-updated">LAST UPDATED · MAY 2024</p>
+      <div className="doc-rule"></div>
+      <p className="lead">This site uses Google AdSense to display advertisements. AdSense uses cookies to serve ads based on your prior visits to this website or other websites. You may opt out of personalized advertising by visiting <a href="https://adssettings.google.com" target="_blank" rel="noopener">Google's Ads Settings</a>.</p>
+      <p>This site contains affiliate links. If you click and make a purchase we may earn a small commission at no extra cost to you.</p>
+      <p>This site does not collect, store or share any personal data from visitors.</p>
+      <p>Third party links on this site are provided for convenience. We are not responsible for the content or privacy practices of those sites.</p>
+    </main>
+  );
+}
+
+function AboutPage() {
+  return (
+    <main className="doc-page">
+      <div className="doc-eyebrow">ABOUT</div>
+      <h1 className="doc-title">About Wearable Index</h1>
+      <div className="doc-rule"></div>
+      <p className="lead">Wearable Index is an independent data visualization tool built to make scientific wearable accuracy data more accessible and interactive.</p>
+      <p>All data is sourced from public research published by The Quantified Scientist on YouTube. This site is not affiliated with or endorsed by The Quantified Scientist.</p>
+      <p>Built by an independent developer. For data corrections or partnership inquiries contact us at <a href="mailto:contact@wearableindex.io">contact@wearableindex.io</a></p>
+    </main>
+  );
+}
+
+function ContactPage() {
+  return (
+    <main className="doc-page">
+      <div className="doc-eyebrow">CONTACT</div>
+      <h1 className="doc-title">Contact</h1>
+      <div className="doc-rule"></div>
+      <p className="lead">For inquiries, data corrections or partnership requests reach out at:</p>
+      <a className="doc-mail" href="mailto:contact@wearableindex.io">contact@wearableindex.io</a>
+    </main>
+  );
+}
+
 function ShopPage() {
   const GENI = "https://geni.us/thequantifiedscientist";
   const SHOP = [
@@ -369,4 +409,4 @@ function AdSlot({ size, label }) {
   );
 }
 
-Object.assign(window, { HeroCard, ModePanel, IndexGuide, ChartToolbar, BrandPill, TopBar, SiteHeader, ShopPage, YouTubePage, AdSlot });
+Object.assign(window, { HeroCard, ModePanel, IndexGuide, ChartToolbar, BrandPill, TopBar, SiteHeader, ShopPage, YouTubePage, PrivacyPage, AboutPage, ContactPage, AdSlot });
