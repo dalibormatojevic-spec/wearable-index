@@ -467,6 +467,7 @@ code { font-family: inherit; background: #1112; padding: 1px 5px; border-radius:
   color: var(--ink); border-bottom: 2px solid var(--ink); padding-bottom: 4px;
 }
 .doc-mail:hover { color: var(--muted); border-color: var(--muted); }
+
 /* ── youtube page ──────────────────────────────────────────────────────── */
 .yt-page {
   flex: 1;
