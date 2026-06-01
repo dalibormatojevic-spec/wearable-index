@@ -256,15 +256,21 @@ function App() {
         </main>
       )}
 
-      {page === "shop"    && <ShopPage />}
+      {page === "shop" && <ShopPage />}
       {page === "youtube" && <YouTubePage />}
-      {page === "about"   && <AboutPage />}
-      {page === "contact" && <ContactPage />}
-      {page === "privacy" && <PrivacyPage />}
 
       {t.showAds && <div className="ad-wrap ad-footer"><AdSlot size={[970, 90]} label="FOOTER BANNER ADVERTISEMENT" /></div>}
 
-      <SiteFooter setPage={setPage} />
+      <footer className="foot">
+        <div>© 2024 WEARABLE INDEX · <a href="Privacy Policy.html">Privacy Policy</a> · <a href="About.html">About</a> · <a href="Contact.html">Contact</a></div>
+        <div className="foot-meta">
+          <span><b>{window.HR_DATA.length}</b> DATA POINTS</span>
+          <span>·</span>
+          <span><b>{new Set(window.HR_DATA.map((d) => d.brand)).size}</b> BRANDS</span>
+          <span>·</span>
+          <span>REVISED: MAY 29</span>
+        </div>
+      </footer>
 
       <TweaksPanel>
         <TweakSection label="Display" />
