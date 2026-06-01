@@ -2,10 +2,6 @@
 
 const { useState: useState_c, useMemo: useMemo_c } = React;
 
-// ── Navigation Context ────────────────────────────────────────────────────
-window.navigate = null; // will be set by App
-
-// Curated display-name + tagline overrides for hero card top pick
 const HERO_LABELS = {
   hr: {
     Apple_chest: { name: "Apple Watch Chest Strap", sub: "The gold standard for consumer heart rate tracking accuracy." },
