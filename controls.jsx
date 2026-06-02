@@ -230,7 +230,7 @@ function TopBar() {
           Featured on <b>The Quantified Scientist</b> — scientific wearable reviews from Vienna
         </span>
         <div className="topbar-actions">
-          <a href="https://www.youtube.com/watch?v=oMVJP5WLxC4&t=566s" target="_blank" rel="noopener">Watch latest review →</a>
+          <a href="https://youtu.be/oMVJP5WLxC4?si=fAYVX62ieVziOfuC" target="_blank" rel="noopener">Watch latest review →</a>
           <a className="topbar-cta" href="https://www.youtube.com/channel/UChNWxrTlmh4IRSevon1X93g/join" target="_blank" rel="noopener" style={{textDecoration:"none",color:"#fff"}}>BECOME A MEMBER</a>
         </div>
       </div>
@@ -418,7 +418,7 @@ function YouTubePage() {
         <div className="yt-eyebrow">CHANNEL</div>
         <h1 className="yt-title">The Quantified Scientist</h1>
         <p className="yt-line">Scientific wearable reviews from Vienna</p>
-        <a className="yt-watch" href="https://www.youtube.com/watch?v=oMVJP5WLxC4&t=566s" target="_blank" rel="noopener">Watch on YouTube →</a>
+        <a className="yt-watch" href="https://youtu.be/oMVJP5WLxC4?si=fAYVX62ieVziOfuC" target="_blank" rel="noopener">Watch on YouTube →</a>
       </div>
     </main>
   );
