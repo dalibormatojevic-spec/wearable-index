@@ -230,7 +230,7 @@ function TopBar() {
           Featured on <b>The Quantified Scientist</b> — scientific wearable reviews from Vienna
         </span>
         <div className="topbar-actions">
-          <a href="https://www.youtube.com/@TheQuantifiedScientist" target="_blank" rel="noopener">Watch latest review →</a>
+          <a href="https://www.youtube.com/watch?v=oMVJP5WLxC4&t=566s" target="_blank" rel="noopener">Watch latest review →</a>
           <a className="topbar-cta" href="https://www.youtube.com/channel/UChNWxrTlmh4IRSevon1X93g/join" target="_blank" rel="noopener" style={{textDecoration:"none",color:"#fff"}}>BECOME A MEMBER</a>
         </div>
       </div>
@@ -256,12 +256,35 @@ function SiteHeader({ page, setPage }) {
   );
 }
 
+function SiteFooter({ setPage }) {
+  return (
+    <footer className="foot">
+      <div>
+        © 2025 WEARABLE INDEX
+        {" · "}
+        <a href="#" onClick={(e) => { e.preventDefault(); setPage("privacy"); }}>Privacy Policy</a>
+        {" · "}
+        <a href="#" onClick={(e) => { e.preventDefault(); setPage("about"); }}>About</a>
+        {" · "}
+        <a href="#" onClick={(e) => { e.preventDefault(); setPage("contact"); }}>Contact</a>
+      </div>
+      <div className="foot-meta">
+        <span><b>68</b> DATA POINTS</span>
+        <span>·</span>
+        <span><b>12</b> BRANDS</span>
+        <span>·</span>
+        <span>REVISED: MAY 29</span>
+      </div>
+    </footer>
+  );
+}
+
 function PrivacyPage() {
   return (
     <main className="doc-page">
       <div className="doc-eyebrow">LEGAL</div>
       <h1 className="doc-title">Privacy Policy</h1>
-      <p className="doc-updated">LAST UPDATED · MAY 2024</p>
+      <p className="doc-updated">LAST UPDATED · MAY 2025</p>
       <div className="doc-rule"></div>
       <p className="lead">This site uses Google AdSense to display advertisements. AdSense uses cookies to serve ads based on your prior visits to this website or other websites. You may opt out of personalized advertising by visiting <a href="https://adssettings.google.com" target="_blank" rel="noopener">Google's Ads Settings</a>.</p>
       <p>This site contains affiliate links. If you click and make a purchase we may earn a small commission at no extra cost to you.</p>
@@ -409,4 +432,4 @@ function AdSlot({ size, label }) {
   );
 }
 
-Object.assign(window, { HeroCard, ModePanel, IndexGuide, ChartToolbar, BrandPill, TopBar, SiteHeader, ShopPage, YouTubePage, PrivacyPage, AboutPage, ContactPage, AdSlot });
+Object.assign(window, { HeroCard, ModePanel, IndexGuide, ChartToolbar, BrandPill, TopBar, SiteHeader, SiteFooter, ShopPage, YouTubePage, PrivacyPage, AboutPage, ContactPage, AdSlot });
