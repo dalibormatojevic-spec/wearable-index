@@ -395,7 +395,7 @@ function YouTubePage() {
         <div className="yt-eyebrow">CHANNEL</div>
         <h1 className="yt-title">The Quantified Scientist</h1>
         <p className="yt-line">Scientific wearable reviews from Vienna</p>
-        <a className="yt-watch" href="https://www.youtube.com/@TheQuantifiedScientist" target="_blank" rel="noopener">Watch on YouTube →</a>
+        <a className="yt-watch" href="https://www.youtube.com/watch?v=oMVJP5WLxC4&t=566s" target="_blank" rel="noopener">Watch on YouTube →</a>
       </div>
     </main>
   );
