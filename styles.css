@@ -54,7 +54,7 @@ code { font-family: inherit; background: #1112; padding: 1px 5px; border-radius:
 .topbar-cta:hover { background: #e60000; }
 
 /* ── ads ───────────────────────────────────────────────────────────────── */
-.ad-wrap { max-width: var(--maxw); margin: 0 auto; padding: 18px 24px 0; }
+.ad-wrap { max-width: var(--maxw); margin: 0 auto; padding: 18px 24px 0; width: 100%; }
 .ad-footer { padding-bottom: 18px; padding-top: 18px; }
 .ad-footer .ad { font-size: 13px; }
 .ad {
@@ -75,6 +75,7 @@ code { font-family: inherit; background: #1112; padding: 1px 5px; border-radius:
   max-width: var(--maxw); margin: 0 auto;
   padding: 22px 24px 12px;
   display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  width: 100%;
 }
 .site-header::after {
   content: ""; position: absolute; left: 50%; bottom: 0;
@@ -110,7 +111,7 @@ code { font-family: inherit; background: #1112; padding: 1px 5px; border-radius:
 /* ── main ──────────────────────────────────────────────────────────────── */
 .main {
   max-width: var(--maxw); margin: 0 auto; padding: 20px 24px 24px;
-  display: flex; flex-direction: column; gap: 18px;
+  display: flex; flex-direction: column; gap: 18px; width: 100%;
 }
 
 /* hero */
@@ -366,6 +367,7 @@ code { font-family: inherit; background: #1112; padding: 1px 5px; border-radius:
   padding: 12px 24px;
   display: flex; justify-content: space-between; align-items: center;
   font-size: 10px; letter-spacing: 0.08em; color: var(--muted);
+  width: 100%;
 }
 .foot::before {
   content: ""; position: absolute; left: 50%; top: 0; bottom: 0;
@@ -394,7 +396,7 @@ code { font-family: inherit; background: #1112; padding: 1px 5px; border-radius:
 }
 
 /* ── shop page ─────────────────────────────────────────────────────────── */
-.shop-main { max-width: var(--maxw); margin: 0 auto; padding: 28px 24px 40px; flex: 1; }
+.shop-main { max-width: var(--maxw); margin: 0 auto; padding: 28px 24px 40px; flex: 1; width: 100%; }
 .shop-head { border-bottom: 1px solid var(--line); padding-bottom: 20px; margin-bottom: 28px; }
 .shop-eyebrow {
   display: inline-block; background: var(--ink); color: #f4f1ea;
