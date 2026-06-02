@@ -74,7 +74,7 @@ code { font-family: inherit; background: #1112; padding: 1px 5px; border-radius:
   position: relative;
   max-width: var(--maxw); margin: 0 auto;
   padding: 22px 24px 12px;
-  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px;
   width: 100%;
 }
 .site-header::after {
