@@ -19,8 +19,8 @@
 }
 
 * { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: var(--mono); -webkit-font-smoothing: antialiased; }
 html { overflow-x: hidden; }
+html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: var(--mono); -webkit-font-smoothing: antialiased; }
 body { overflow-x: hidden; }
 button { font-family: inherit; cursor: pointer; }
 a { color: inherit; text-decoration: none; }
@@ -35,25 +35,22 @@ code { font-family: inherit; background: #1112; padding: 1px 5px; border-radius:
   font-size: 11px;
   letter-spacing: 0.04em;
   border-bottom: 1px solid var(--line);
-  width: 100%;
 }
 .topbar-inner {
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 8px 16px;
-  display: flex; align-items: center; justify-content: space-between; gap: 12px;
-  flex-wrap: wrap;
+  padding: 8px 24px;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
 }
-.topbar-meta { color: var(--muted); flex: 1; min-width: 0; }
+.topbar-meta { color: var(--muted); }
 .topbar-meta b { color: var(--ink); }
 .yt-badge { display: inline-flex; align-items: center; margin-right: 7px; vertical-align: -3px; }
-.topbar-actions { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
-.topbar-actions a { color: var(--muted); white-space: nowrap; }
+.topbar-actions { display: flex; align-items: center; gap: 16px; }
+.topbar-actions a { color: var(--muted); }
 .topbar-actions a:hover { color: var(--ink); text-decoration: underline; }
 .topbar-cta {
   background: #FF0000; color: #fff; border: 0; padding: 6px 14px;
   font: inherit; letter-spacing: 0.08em; font-weight: 600; border-radius: 0;
-  white-space: nowrap;
 }
 .topbar-cta:hover { background: #e60000; }
 
@@ -151,7 +148,7 @@ code { font-family: inherit; background: #1112; padding: 1px 5px; border-radius:
 /* content split */
 .content { display: grid; grid-template-columns: 1fr 280px; gap: 18px; align-items: start; }
 
-.chart-col { display: flex; flex-direction: column; gap: 12px; }
+.chart-col { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
 .chart-head {
   display: flex; justify-content: space-between; align-items: flex-end; gap: 16px;
   padding: 6px 2px 2px;
@@ -172,6 +169,7 @@ code { font-family: inherit; background: #1112; padding: 1px 5px; border-radius:
   background: var(--bg-elev);
   border: 1.5px solid #C8C4BC;
   overflow: hidden;
+  width: 100%;
 }
 .chart-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 .chart-msg { display: flex; align-items: center; justify-content: center; }
@@ -219,7 +217,7 @@ code { font-family: inherit; background: #1112; padding: 1px 5px; border-radius:
   display: flex; justify-content: space-between; align-items: center; gap: 12px;
   padding: 6px 2px;
 }
-.toolbar-actions { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+.toolbar-actions { display: flex; gap: 14px; align-items: center; }
 .tb-text {
   border: 0; background: transparent; padding: 7px 2px;
   font: inherit; font-size: 11px; letter-spacing: 0.1em; color: var(--muted);
@@ -399,22 +397,6 @@ code { font-family: inherit; background: #1112; padding: 1px 5px; border-radius:
   .side { position: static; }
   .hero { grid-template-columns: 1fr; gap: 18px; }
   .hero-right { justify-content: flex-start; }
-}
-
-@media (max-width: 640px) {
-  .site-header {
-    grid-template-columns: 1fr auto;
-    padding: 14px 16px 10px;
-  }
-  .site-header .nav {
-    display: none;
-  }
-  .main { padding: 16px; }
-  .hero { padding: 16px; }
-  .hero-title { font-size: 26px; }
-  .hero-val { font-size: 28px; }
-  .topbar-meta { display: none; }
-  .pills { grid-template-columns: 1fr 1fr; }
 }
 
 /* ── shop page ─────────────────────────────────────────────────────────── */
