@@ -30,8 +30,8 @@ function App() {
   const top10Names = (rows, key) =>
     new Set([...rows].sort((a, b) => b[key] - a[key]).slice(0, 10).map((d) => d.name));
   const [activeByMode, setActiveByMode] = useState(() => ({
-    hr: top10Names(window.HR_DATA, "r"),
-    sleep: top10Names(window.SLEEP_DATA, "score"),
+    hr: new Set(window.HR_DATA.map((d) => d.name)),
+    sleep: new Set(window.SLEEP_DATA.map((d) => d.name)),
     steps: new Set(),
   }));
   const activeSet = activeByMode[mode] || new Set();
@@ -41,7 +41,7 @@ function App() {
   const [pinned, setPinned] = useState(null);
   const [hovered, setHovered] = useState(null);
   const [search, setSearch] = useState("");
-  const [isTop10, setIsTop10] = useState(true);
+  const [isTop10, setIsTop10] = useState(false);
 
   useEffect(() => {
     if (!pinned) return;
@@ -261,7 +261,7 @@ function App() {
       {t.showAds && <div className="ad-wrap ad-footer"><AdSlot size={[970, 90]} label="FOOTER BANNER ADVERTISEMENT" /></div>}
 
       <footer className="foot">
-        <div>© 2024 WEARABLE INDEX · <a href="#" onClick={(e) => { e.preventDefault(); setPage("privacy"); }}>Privacy Policy</a> · <a href="#" onClick={(e) => { e.preventDefault(); setPage("about"); }}>About</a> · <a href="#" onClick={(e) => { e.preventDefault(); setPage("contact"); }}>Contact</a></div>
+        <div>© 2025 WEARABLE INDEX · <a href="#" onClick={(e) => { e.preventDefault(); setPage("privacy"); }}>Privacy Policy</a> · <a href="#" onClick={(e) => { e.preventDefault(); setPage("about"); }}>About</a> · <a href="#" onClick={(e) => { e.preventDefault(); setPage("contact"); }}>Contact</a></div>
         <div className="foot-meta">
           <span><b>{window.HR_DATA.length}</b> DATA POINTS</span>
           <span>·</span>
